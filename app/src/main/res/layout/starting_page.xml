@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sp_title"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="FitMaster"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/sp_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Welcome To FitMaster"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="22dp" />
+
+    <ImageView
+        android:id="@+id/sp_image"
+        android:layout_width="358dp"
+        android:layout_height="444dp"
+        android:src="@drawable/fitpal" />
+
+    <Button
+        android:id="@+id/sp_login"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Log in"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/sp_register"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/blue_button"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>
