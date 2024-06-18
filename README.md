@@ -1,4 +1,4 @@
-# MOBDEVEPROJECT
+# FitMaster
 
 FitMaster is a fitness app designed to help users achieve their fitness goals through personalized workout
 plans and progress tracking. Users can log in, choose how many days per week they want to work out, and
