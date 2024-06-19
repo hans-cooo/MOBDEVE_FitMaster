@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/r_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Register Account"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="22dp" />
+
+    <EditText
+        android:id="@+id/r_fullname"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Full Name" />
+
+    <EditText
+        android:id="@+id/r_birthday"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Birthday" />
+
+    <EditText
+        android:id="@+id/r_email"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/r_password"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Password" />
+
+    <Button
+        android:id="@+id/r_create_account"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/blue_button"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/r_have_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="Already have an account?"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/r_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text=" Login"
+            android:textColor="@color/blue_button" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/r_cont_with_google"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Continue with Google"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/r_terms"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="By continuing, you agree to the Terms of Use. Read our Privacy Policy." />
+
+</LinearLayout>
