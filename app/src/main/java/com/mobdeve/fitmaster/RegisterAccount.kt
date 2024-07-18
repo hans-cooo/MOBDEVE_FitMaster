@@ -1,22 +1,23 @@
 package com.mobdeve.fitmaster
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.mobdeve.fitmaster.databinding.RegisterAccountBinding
 
 class RegisterAccount : AppCompatActivity() {
+    private lateinit var viewBinding: RegisterAccountBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        this.viewBinding = RegisterAccountBinding.inflate(layoutInflater)
         setContentView(R.layout.register_account)
-        /*
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        viewBinding.btnLogin.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
         }
-        */
+
     }
 }

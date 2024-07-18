@@ -6,7 +6,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="create_account">Create Account</string>
-    <string name="already_have_an_account">Already have an account</string>
+    <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="by_continuing">By continuing, you agree to the Terms of Use.</string>
