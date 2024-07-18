@@ -101,6 +101,15 @@ class Login : AppCompatActivity() {
            }
 
         }
+fun signOutUser(view: View) {
+    Firebase.auth.signOut()
+    Toast.makeText(this,"Sign Out", Toast.LENGTH_LONG).show()
+    binding.txtName.text = ""
+    binding.txtEmail.text = ""
+    binding.txtStatus.text = ""
+    binding.image.View.setImageBitmap(null)
+
+}
 
 
     override fun onStart()
