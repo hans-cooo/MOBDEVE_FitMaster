@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "225543104014",
+    "project_id": "fitmaster-2b09c",
+    "storage_bucket": "fitmaster-2b09c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225543104014:android:af0dc4968489f8543dfe5f",
+        "android_client_info": {
+          "package_name": "com.mobdeve.fitmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225543104014-pojsu2v0fs3kdisad5sbvi8qvfbb826k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobdeve.fitmaster",
+            "certificate_hash": "ebaf62d5c516a86f1f2b6c50522af03bd628218c"
+          }
+        },
+        {
+          "client_id": "225543104014-4p6pgpr1ndf9plhkvf9mm8grdbt55lb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb6UIAKX3Ha7xPpkbDJAM8_WM6mpnQ80Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225543104014-4p6pgpr1ndf9plhkvf9mm8grdbt55lb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

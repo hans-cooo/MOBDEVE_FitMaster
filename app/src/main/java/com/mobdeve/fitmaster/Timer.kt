@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -64,6 +65,7 @@ class Timer : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun updateTimerDisplay() {
         val minutes = timeInSeconds / 60
         val seconds = timeInSeconds % 60
