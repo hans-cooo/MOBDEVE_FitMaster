@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,19 +27,33 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.Executors
 
 class Login : AppCompatActivity() {
+    // View binding for accessing views in the layout
     private lateinit var viewBinding: LoginBinding
+
+    // Firebase Authentication instance
     private lateinit var auth: FirebaseAuth
+
+    // One Tap Sign-In client for Google Sign-In
     private var oneTapClient: SignInClient? = null
+
+    // Google Sign-In request configuration
     private lateinit var signInRequest: BeginSignInRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Initialize view binding
         this.viewBinding = LoginBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        // Initialize Firebase Auth
         auth = Firebase.auth
+
+        // Initialize One Tap Sign-In client
         oneTapClient = Identity.getSignInClient(this)
 
+        // Configure Google Sign-In request
         signInRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -53,94 +66,109 @@ class Login : AppCompatActivity() {
             )
             .build()
 
+        // Navigate to RegisterAccount activity when the sign-up button is clicked
         viewBinding.btnSignUp.setOnClickListener {
             val intent = Intent(this, RegisterAccount::class.java)
             startActivity(intent)
         }
 
-        showUser() // Call the showUser function to display user details if already signed in
+        // Display user information if already signed in
+        showUser()
     }
 
-    fun signingGoogle (view: View)
-    {
-        CoroutineScope(Dispatchers.Main).launch{
+    // Function to handle Google Sign-In button click
+    fun signingGoogle(view: View) {
+        CoroutineScope(Dispatchers.Main).launch {
             signingGoogle()
         }
     }
 
-    private suspend fun signingGoogle ()
-    {
-        val result = oneTapClient?. beginSignIn()?.await()
+    // Suspend function to initiate Google Sign-In
+    private suspend fun signingGoogle() {
+        // Start the sign-in process
+        val result = oneTapClient?.beginSignIn(signInRequest)?.await()
         val intentSenderRequest = IntentSenderRequest.Builder(result!!.pendingIntent).build()
+        // Launch the sign-in intent
         activityResultLauncher.launch(intentSenderRequest)
     }
 
+    // Activity result launcher to handle the result of the sign-in intent
     private val activityResultLauncher: ActivityResultLauncher<IntentSenderRequest> =
         registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
-        ){ result ->
-           if(result.resultCode == RESULT_OK){
-               try{
-                   val credential = oneTapClient!!.getSignInCredentialFromIntent(result.data)
-                   val idToken= credential.googleIdToken
-                   if (idToken != null){
-                       val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
-                       auth.signInWithCredential(firebaseCredential).addOnCompleteListener{
-                           if (it.isSuccessful){
-                               binding.progressBar.visibility = View.INVISIBLE
-                               Toast.makeText(this, "Sign in Complete", Toast.LENGTH_LONG)
-                               showUser()
-                           }
-                       }
-                   }
-
-
-               } catch (e: ApiException){
-                   e.printStackTrace()
-               }
-           }
-
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                try {
+                    // Get the sign-in credential from the result data
+                    val credential = oneTapClient!!.getSignInCredentialFromIntent(result.data)
+                    val idToken = credential.googleIdToken
+                    if (idToken != null) {
+                        // Create Firebase credential with the ID token
+                        val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+                        // Sign in with the Firebase credential
+                        auth.signInWithCredential(firebaseCredential).addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                // Hide progress bar and show success message
+                                viewBinding.progressBar.visibility = View.INVISIBLE
+                                Toast.makeText(this, "Sign in Complete", Toast.LENGTH_LONG).show()
+                                // Display user information
+                                showUser()
+                            }
+                        }
+                    }
+                } catch (e: ApiException) {
+                    // Handle sign-in failure
+                    e.printStackTrace()
+                }
+            }
         }
-fun signOutUser(view: View) {
-    Firebase.auth.signOut()
-    Toast.makeText(this,"Sign Out", Toast.LENGTH_LONG).show()
-    binding.txtName.text = ""
-    binding.txtEmail.text = ""
-    binding.txtStatus.text = ""
-    binding.image.View.setImageBitmap(null)
 
-}
+    // Function to sign out the current user
+    fun signOutUser(view: View) {
+        // Sign out from Firebase
+        Firebase.auth.signOut()
+        // Show sign-out message and clear displayed user information
+        Toast.makeText(this, "Sign Out", Toast.LENGTH_LONG).show()
+        viewBinding.txtName.text = ""
+        viewBinding.txtEmail.text = ""
+        viewBinding.txtStatus.text = ""
+        viewBinding.imageView.setImageBitmap(null)
+    }
 
-
-    override fun onStart()
-    {
+    // Function to display user information if already signed in
+    override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-        if (currentUser != null) run{
+        if (currentUser != null) {
             showUser()
         }
     }
 
+    // Function to display the current user's information
     private fun showUser() {
         val user = Firebase.auth.currentUser
         user?.let {
+            // Retrieve user details
             val name = it.displayName
             val email = it.email
             val photoUrl = it.photoUrl
             val emailVerified = it.isEmailVerified
 
+            // Display user details in the UI
             viewBinding.txtName.text = name
             viewBinding.txtEmail.text = email
             if (emailVerified) {
                 viewBinding.txtStatus.text = "Verified Email"
             }
 
+            // Load and display user profile picture
             var image: Bitmap? = null
             val imageURL = photoUrl.toString()
             val executorService = Executors.newSingleThreadExecutor()
 
             executorService.execute {
                 try {
+                    // Fetch the image from the URL
                     val `in` = java.net.URL(imageURL).openStream()
                     image = BitmapFactory.decodeStream(`in`)
                 } catch (e: Exception) {
@@ -150,7 +178,9 @@ fun signOutUser(view: View) {
 
             runOnUiThread {
                 try {
+                    // Wait for the image to be loaded
                     Thread.sleep(1000)
+                    // Display the image in the ImageView
                     viewBinding.imageView.setImageBitmap(image)
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
