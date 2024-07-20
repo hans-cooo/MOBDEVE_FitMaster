@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "225543104014",
-    "project_id": "fitmaster-2b09c",
-    "storage_bucket": "fitmaster-2b09c.appspot.com"
+    "project_number": "666651990925",
+    "project_id": "fitmaster-31b28",
+    "storage_bucket": "fitmaster-31b28.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:225543104014:android:af0dc4968489f8543dfe5f",
+        "mobilesdk_app_id": "1:666651990925:android:523f1300ed709d4ec53bc4",
         "android_client_info": {
           "package_name": "com.mobdeve.fitmaster"
         }
       },
       "oauth_client": [
         {
-          "client_id": "225543104014-pojsu2v0fs3kdisad5sbvi8qvfbb826k.apps.googleusercontent.com",
+          "client_id": "666651990925-947df3h2scnna242o62ufmnd1pc1rle6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mobdeve.fitmaster",
-            "certificate_hash": "ebaf62d5c516a86f1f2b6c50522af03bd628218c"
+            "certificate_hash": "1cb2c6b2bfed2010b0e62a79040fea50c5b04541"
           }
         },
         {
-          "client_id": "225543104014-4p6pgpr1ndf9plhkvf9mm8grdbt55lb0.apps.googleusercontent.com",
+          "client_id": "666651990925-7mil0h90nft6tv5vtq08538ku7fug95o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAb6UIAKX3Ha7xPpkbDJAM8_WM6mpnQ80Q"
+          "current_key": "AIzaSyApz9XxacuOu4EMVbDFsOsQLJZwmD0QOJ8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "225543104014-4p6pgpr1ndf9plhkvf9mm8grdbt55lb0.apps.googleusercontent.com",
+              "client_id": "666651990925-7mil0h90nft6tv5vtq08538ku7fug95o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
