@@ -46,7 +46,9 @@ class Login : AppCompatActivity() {
         // Initialize view binding
         this.viewBinding = LoginBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+        auth = FirebaseAuth.getInstance()
 
+        /* TODO: fix
         // Initialize Firebase Auth
         auth = Firebase.auth
 
@@ -74,7 +76,14 @@ class Login : AppCompatActivity() {
 
         // Display user information if already signed in
         showUser()
+         */
+        viewBinding.btnSignUp.setOnClickListener(){
+            val intent = Intent(this, RegisterAccount::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
+
 
     // Function to handle Google Sign-In button click
     fun signingGoogle(view: View) {
@@ -109,7 +118,7 @@ class Login : AppCompatActivity() {
                         auth.signInWithCredential(firebaseCredential).addOnCompleteListener {
                             if (it.isSuccessful) {
                                 // Hide progress bar and show success message
-                                viewBinding.progressBar.visibility = View.INVISIBLE
+                                //viewBinding.progressBar.visibility = View.INVISIBLE TODO: fix
                                 Toast.makeText(this, "Sign in Complete", Toast.LENGTH_LONG).show()
                                 // Display user information
                                 showUser()
@@ -124,6 +133,7 @@ class Login : AppCompatActivity() {
         }
 
     // Function to sign out the current user
+    /* TODO: fix
     fun signOutUser(view: View) {
         // Sign out from Firebase
         Firebase.auth.signOut()
@@ -134,6 +144,7 @@ class Login : AppCompatActivity() {
         viewBinding.txtStatus.text = ""
         viewBinding.imageView.setImageBitmap(null)
     }
+     */
 
     // Function to display user information if already signed in
     override fun onStart() {
@@ -146,6 +157,7 @@ class Login : AppCompatActivity() {
 
     // Function to display the current user's information
     private fun showUser() {
+     /*   TODO: fix
         val user = Firebase.auth.currentUser
         user?.let {
             // Retrieve user details
@@ -187,5 +199,7 @@ class Login : AppCompatActivity() {
                 }
             }
         }
+
+      */
     }
 }

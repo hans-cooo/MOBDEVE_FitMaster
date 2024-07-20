@@ -102,33 +102,34 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/tvwAkready"
+                android:id="@+id/tvwAlready"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center"
                 android:text="@string/already_have_an_account"
-                android:textAlignment="textEnd" />
+                android:textAlignment="center" />
 
-            <Button
-                android:id="@+id/btnLogin"
+            <TextView
+                android:id="@+id/tvwLoginRedirect"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:background="@android:drawable/divider_horizontal_dark"
-                android:padding="0dp"
-                android:text="@string/login"
-                android:textColor="@color/blue_button" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center"
+                android:text="LOG IN"
+                android:textAlignment="center"
+                android:textColor="@color/blue_button"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/continue_with_google"
