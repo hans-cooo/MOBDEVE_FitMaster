@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,8 @@ class Dashboard : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         viewBinding.imvProfile.setOnClickListener(){
-
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
         }
         /*TODO:
            Implement data handler, data comes from firebase

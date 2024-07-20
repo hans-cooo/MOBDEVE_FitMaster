@@ -44,6 +44,7 @@ class RegisterAccount : AppCompatActivity() {
                     if(task.isSuccessful){
                         Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, Dashboard::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         finish()
                     }else {
