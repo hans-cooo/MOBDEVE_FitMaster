@@ -3,8 +3,6 @@ package com.mobdeve.fitmaster
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.mobdeve.fitmaster.databinding.ActivityDashboardBinding
 
 class Dashboard : AppCompatActivity() {
@@ -13,11 +11,11 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_dashboard)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        this.viewBinding = ActivityDashboardBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+
+        viewBinding.imvProfile.setOnClickListener(){
+
         }
         /*TODO:
            Implement data handler, data comes from firebase
