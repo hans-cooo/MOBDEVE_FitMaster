@@ -15,6 +15,8 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -47,6 +49,27 @@ class Login : AppCompatActivity() {
         this.viewBinding = LoginBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         auth = FirebaseAuth.getInstance()
+
+        viewBinding.btnLogin.setOnClickListener(){
+            val email = viewBinding.edtEmail.text.toString()
+            val password = viewBinding.edtPassword.text.toString()
+            if(email.isEmpty() or password.isEmpty()){
+                Toast.makeText(this, "Incomplete Fields", Toast.LENGTH_LONG).show()
+            }
+            else{
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task: Task<AuthResult> ->
+                    if(task.isSuccessful) {
+                        Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, Dashboard::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }else {
+                        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
 
         /* TODO: fix
         // Initialize Firebase Auth
