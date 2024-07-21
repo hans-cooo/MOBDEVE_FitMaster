@@ -15,9 +15,13 @@ class Dashboard : AppCompatActivity() {
         this.viewBinding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+
+
+
         viewBinding.imvProfile.setOnClickListener(){
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
+
         }
         /*TODO:
            Implement data handler, data comes from firebase
