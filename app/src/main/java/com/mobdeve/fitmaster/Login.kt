@@ -1,8 +1,6 @@
 package com.mobdeve.fitmaster
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,21 +10,17 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.fitmaster.databinding.LoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.util.concurrent.Executors
 
 class Login : AppCompatActivity() {
     // View binding for accessing views in the layout
@@ -53,20 +47,39 @@ class Login : AppCompatActivity() {
         viewBinding.btnLogin.setOnClickListener(){
             val email = viewBinding.edtEmail.text.toString()
             val password = viewBinding.edtPassword.text.toString()
+
+            val db = Firebase.firestore
+            val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+            val query = usersRef
+                .whereEqualTo(MyFirestoreReferences.EMAIL_FIELD, email)
+                .whereEqualTo(MyFirestoreReferences.PASSWORD_FIELD, password)
+
             if(email.isEmpty() or password.isEmpty()){
                 Toast.makeText(this, "Incomplete Fields", Toast.LENGTH_LONG).show()
             }
             else{
-                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task: Task<AuthResult> ->
-                    if(task.isSuccessful) {
-                        Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, Dashboard::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intent)
-                    }else {
-                        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+                query.get()
+                    .addOnSuccessListener { documents ->
+                        if (documents.isEmpty) {
+                            // No matching document found
+                            Toast.makeText(this, "No user found with the provided email and password.", Toast.LENGTH_LONG).show()
+                        } else {
+                            // Matching document(s) found
+                            for (document in documents) {
+                                Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                                val intent = Intent(this, Dashboard::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                            }
+                        }
                     }
-                }
+                    .addOnFailureListener { e ->
+                        // Handle the error
+                        Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show()
+                    }
+
+
+
             }
 
         }
