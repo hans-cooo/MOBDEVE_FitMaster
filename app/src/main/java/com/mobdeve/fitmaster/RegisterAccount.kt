@@ -2,6 +2,7 @@ package com.mobdeve.fitmaster
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +47,7 @@ class RegisterAccount : AppCompatActivity() {
                 Toast.makeText(this, "Password should be at least 6 characters.", Toast.LENGTH_LONG).show()
             }
             else{
-                val data = hashMapOf<String, Any>(
+                val data = hashMapOf(
                     MyFirestoreReferences.USERNAME_FIELD to name,
                     MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
                     MyFirestoreReferences.EMAIL_FIELD to email,
@@ -55,7 +56,12 @@ class RegisterAccount : AppCompatActivity() {
                 usersRef.add(data)
                     .addOnSuccessListener { documentReference ->
                         // For successful upload
+                        Log.d("RegisterAccount", "User added with ID: ${documentReference.id}")
                         Toast.makeText(this, "User added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, Dashboard::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        finish()
                     }
                     .addOnFailureListener { e ->
                         // For failed upload
