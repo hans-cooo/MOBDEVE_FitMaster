@@ -2,12 +2,13 @@ package com.mobdeve.fitmaster
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
 import com.mobdeve.fitmaster.databinding.RegisterAccountBinding
 
 class RegisterAccount : AppCompatActivity() {
@@ -33,6 +34,12 @@ class RegisterAccount : AppCompatActivity() {
             val birthday = viewBinding.edtBirthday.text.toString()
             val email = viewBinding.edtEmail.text.toString()
             val password = viewBinding.edtPassword.text.toString()
+
+            val db = Firebase.firestore
+
+            val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+
+
             if(name.isEmpty() or birthday.isEmpty() or email.isEmpty() or password.isEmpty()){
                 Toast.makeText(this, "Fill Incomplete Fields", Toast.LENGTH_LONG).show()
             }
@@ -40,17 +47,26 @@ class RegisterAccount : AppCompatActivity() {
                 Toast.makeText(this, "Password should be at least 6 characters.", Toast.LENGTH_LONG).show()
             }
             else{
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ task: Task<AuthResult> ->
-                    if(task.isSuccessful){
-                        Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_LONG).show()
+                val data = hashMapOf(
+                    MyFirestoreReferences.USERNAME_FIELD to name,
+                    MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
+                    MyFirestoreReferences.EMAIL_FIELD to email,
+                    MyFirestoreReferences.PASSWORD_FIELD to password
+                )
+                usersRef.add(data)
+                    .addOnSuccessListener { documentReference ->
+                        // For successful upload
+                        Log.d("RegisterAccount", "User added with ID: ${documentReference.id}")
+                        Toast.makeText(this, "User added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, Dashboard::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         finish()
-                    }else {
-                        Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_LONG).show()
                     }
-                }
+                    .addOnFailureListener { e ->
+                        // For failed upload
+                        Toast.makeText(this, "Error adding user: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
             }
         }
 
