@@ -31,5 +31,6 @@ class Dashboard : AppCompatActivity() {
            setonclicklistener on btnDay to start workout activity
            Figure out how Manage Workout functions
         */
+
     }
 }
