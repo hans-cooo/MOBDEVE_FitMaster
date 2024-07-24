@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,15 @@ class Dashboard : AppCompatActivity() {
             recyclerView.adapter = DayStatusAdapter(dayList)
         }
 
+        viewBinding.imvProfile.setOnClickListener(){
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
 
+        viewBinding.btnEdit.setOnClickListener(){
+            val intent = Intent(this, EditWorkout::class.java)
+            startActivity(intent)
+        }
 
     }
 
