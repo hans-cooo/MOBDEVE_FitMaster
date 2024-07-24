@@ -68,6 +68,8 @@ class Login : AppCompatActivity() {
                             for (document in documents) {
                                 Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this, Dashboard::class.java)
+                                // Returns email used for account
+                                intent.putExtra("email", email)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             }

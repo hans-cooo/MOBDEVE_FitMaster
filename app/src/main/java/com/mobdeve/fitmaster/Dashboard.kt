@@ -2,34 +2,43 @@ package com.mobdeve.fitmaster
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.fitmaster.databinding.ActivityDashboardBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Dashboard : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDashboardBinding
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         this.viewBinding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-
-
+        val email = this.intent.getStringExtra("email")
+        this.recyclerView = viewBinding.workoutDayRecycler
+        this.recyclerView.layoutManager = LinearLayoutManager(this)
+        //TODO: Complete generateDayStatuses function in DataGenerator.kt and make it work with email
+        CoroutineScope(Dispatchers.Main).launch {
+            val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email.toString())
+            recyclerView.adapter = DayStatusAdapter(dayList)
+        }
 
         viewBinding.imvProfile.setOnClickListener(){
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
-
         }
-        /*TODO:
-           Implement data handler, data comes from firebase
-           Complete RecyclerView Adapter (id:workoutDayRecycler) using workout_day.xml as the viewholder layout.
-           Set imvStatus to status_(complete/error/empty).png depending on the workout status.
-           Set btnDay background to button_(gray/blue).xml if workout day is (completed/incomplete)
-           setonclicklistener on btnDay to start workout activity
-           Figure out how Manage Workout functions
-        */
+
+        viewBinding.btnEdit.setOnClickListener(){
+            val intent = Intent(this, EditWorkout::class.java)
+            startActivity(intent)
+        }
+
     }
+
+
 }
