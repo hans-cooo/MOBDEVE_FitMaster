@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.fitmaster.databinding.EditWorkoutBinding
 
 class EditWorkout : AppCompatActivity() {
     private lateinit var viewBinding: EditWorkoutBinding
-    private lateinit var recyclerView: RecyclerView
     private val toggleStates = mutableMapOf<String, Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +21,6 @@ class EditWorkout : AppCompatActivity() {
 
         val email = this.intent.getStringExtra("email") ?: return
 
-        this.recyclerView = viewBinding.maxWeightRecycler
 
         // Set up ToggleButton listeners
         setupToggleButtons()
