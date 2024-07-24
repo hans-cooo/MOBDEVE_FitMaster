@@ -30,4 +30,17 @@
     <string name="workout_plan">Workout Plan</string>
     <string name="edit_workout">Edit Workout</string>
     <string name="enter_weight_in_kg">Enter weight (kg)</string>
+    <string name="kg">kg</string>
+    <string name="dumbbell_bench_press">Dumbbell Bench Press</string>
+    <string name="inclined_bench_press">Inclined Bench Press</string>
+    <string name="deadlift">Deadlift</string>
+    <string name="squat">Squat</string>
+    <string name="jumping_jacks">Jumping Jacks</string>
+    <string name="rows">Rows</string>
+    <string name="high_knees">High Knees</string>
+    <string name="pushups">Pushups</string>
+    <string name="bicycle_crunches">Bicycle Crunches</string>
+    <string name="burpees">Burpees</string>
+    <string name="jog">Jog</string>
+    <string name="reps">reps</string>
 </resources>
