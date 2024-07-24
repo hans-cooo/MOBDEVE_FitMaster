@@ -6,11 +6,14 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.fitmaster.databinding.ProfileBinding
 
 class Profile : ComponentActivity() {
     private lateinit var viewBinding: ProfileBinding
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,8 +22,34 @@ class Profile : ComponentActivity() {
         auth = FirebaseAuth.getInstance()
         val email = this.intent.getStringExtra("email")
 
+        val db = Firebase.firestore
+        val usersRef = db.collection("Users")
+        val query = usersRef.whereEqualTo("email", email)
+
+        // Set hints
+        if (email != null) {
+            query.get().addOnSuccessListener { documents ->
+                if (documents != null && !documents.isEmpty) {
+                    val document = documents.first()
+                    val birthday = document.getString("birthday") ?: ""
+                    val weight = document.getString("weight") ?: "Weight (kg)"
+                    val height = document.getString("height") ?: "Height (cm)"
+
+                    viewBinding.edtProfileBDay.hint = birthday
+                    viewBinding.edtProfileWeight.hint = weight
+                    viewBinding.edtProfileHeight.hint = height
+                } else {
+                    Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error fetching profile: ${exception.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        //TODO: Create save button functionality
+
         // Log Out Button
-        viewBinding.btnLogout.setOnClickListener(){
+        viewBinding.btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -28,9 +57,9 @@ class Profile : ComponentActivity() {
         }
 
         // Change Password Button
-        viewBinding.tvwChangePassword.setOnClickListener(){
-            if(auth.currentUser != null){
-                auth.sendPasswordResetEmail(auth.currentUser!!.email!!).addOnCompleteListener{ task ->
+        viewBinding.tvwChangePassword.setOnClickListener {
+            if (auth.currentUser != null) {
+                auth.sendPasswordResetEmail(auth.currentUser!!.email!!).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Reset link sent to your email", Toast.LENGTH_LONG).show()
                     } else {
