@@ -9,119 +9,125 @@
     android:padding="16dp">
 
     <!-- Heading -->
-    <TextView
-        android:id="@+id/summary_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Summary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <TextView
+            android:id="@+id/summary_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Summary"
+            android:textColor="@color/Material_Black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/summary_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_weight="5"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/summary" />
+
+        <TextView
+            android:id="@+id/workout_complete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Workout Complete!"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <!-- Total Time Text Box -->
+            <EditText
+                android:id="@+id/total_time_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/edit_text_border"
+                android:enabled="false"
+                android:hint="Total Time: \n0:00"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <!-- Calories Burned Text Box -->
+            <EditText
+                android:id="@+id/calories_burned_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/edit_text_border"
+                android:enabled="false"
+                android:hint="Calories Burned: \n0"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <!-- Weight Text Box -->
+            <EditText
+                android:id="@+id/weight_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/edit_text_border"
+                android:enabled="false"
+                android:hint="Weight: \n0 kg"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <!-- Streak Text Box -->
+            <EditText
+                android:id="@+id/streak_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/edit_text_border"
+                android:enabled="false"
+                android:hint="Streak: \n0 days"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </GridLayout>
+    </LinearLayout>
 
     <!-- Image -->
 
     <!-- Workout Complete Text -->
-    <ImageView
-        android:id="@+id/summary_image"
-        android:layout_width="262dp"
-        android:layout_height="307dp"
-        android:src="@drawable/summary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/summary_heading" />
-
-    <TextView
-        android:id="@+id/workout_complete_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Workout Complete!"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/summary_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Container for 2x2 Grid -->
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/workout_complete_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Total Time Text Box -->
-        <EditText
-            android:id="@+id/total_time_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_margin="8dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/edit_text_border"
-            android:padding="16dp"
-            android:hint="Total Time: \n0:00"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:enabled="false"/>
-
-        <!-- Calories Burned Text Box -->
-        <EditText
-            android:id="@+id/calories_burned_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_margin="8dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/edit_text_border"
-            android:padding="16dp"
-            android:hint="Calories Burned: \n0"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:enabled="false"/>
-
-        <!-- Weight Text Box -->
-        <EditText
-            android:id="@+id/weight_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_margin="8dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/edit_text_border"
-            android:padding="16dp"
-            android:hint="Weight: \n0 kg"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:enabled="false"/>
-
-        <!-- Streak Text Box -->
-        <EditText
-            android:id="@+id/streak_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_margin="8dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/edit_text_border"
-            android:padding="16dp"
-            android:hint="Streak: \n0 days"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:enabled="false"/>
-    </GridLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
