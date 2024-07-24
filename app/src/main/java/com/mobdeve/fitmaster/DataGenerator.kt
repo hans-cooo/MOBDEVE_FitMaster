@@ -36,5 +36,17 @@ class DataGenerator {
                 else -> R.drawable.status_error
             }
         }
+
+        fun generateExercises(): ArrayList<ExcerciseData> {
+            val exercises = ArrayList<ExcerciseData>()
+
+            // Sample exercises
+            exercises.add(ExcerciseData(name = "Push-ups", duration = "N/A", repetitions = "15 reps"))
+            exercises.add(ExcerciseData(name = "Squats", duration = "N/A", repetitions = "20 reps"))
+            exercises.add(ExcerciseData(name = "Jumping Jacks", duration = "N/A", repetitions = "30 reps"))
+            exercises.add(ExcerciseData(name = "Plank", duration = "60 seconds", repetitions = "N/A"))  // Plank may not have repetitions
+
+            return exercises
+        }
     }
 }
