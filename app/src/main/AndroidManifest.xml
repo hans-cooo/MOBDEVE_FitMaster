@@ -16,7 +16,10 @@
         android:theme="@style/Theme.FitMaster"
         tools:targetApi="31">
         <activity
-            android:name=".Summary"
+            android:name=".EditWorkout"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutActivity"
             android:exported="false" />
         <activity
             android:name=".Goals"
