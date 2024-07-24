@@ -28,5 +28,15 @@ object MyFirestoreReferences {
     const val SATURDAY_FIELD = "daySat"
     const val SUNDAY_FIELD = "daySun"
 
-
+    const val JUMPING_JACKS_FIELD = "JumpingJacks"
+    const val SQUATS_FIELD = "squat"
+    const val ROWS_FIELD = "rows"
+    const val PUSHUPS_FIELD = "Pushups"
+    const val BICYCLE_CRUNCHES = "BicycleCrunches"
+    const val BURPEES_FIELDS = "Burpees"
+    const val DUMBELL_BENCH_PRESS_FIELD = "DumbbellBenchPress"
+    const val HIGH_KNEES_FIELD = "HighKnees"
+    const val INCLINED_BENCH_PRESS_FIELD = "InclinedBenchPress"
+    const val DEADLIFT_FIELD = "deadlift"
+    const val JOG_MINUTES = "jogMinutes"
 }

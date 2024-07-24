@@ -39,6 +39,7 @@ class RegisterAccount : AppCompatActivity() {
 
             val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
             val userProgressRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
+            val userWorkoutRef = db.collection(MyFirestoreReferences.USER_WORKOUT_COLLECTION)
 
             if(name.isEmpty() or birthday.isEmpty() or email.isEmpty() or password.isEmpty()){
                 Toast.makeText(this, "Fill Incomplete Fields", Toast.LENGTH_LONG).show()
@@ -58,6 +59,33 @@ class RegisterAccount : AppCompatActivity() {
                         // For successful upload
                         Log.d("RegisterAccount", "User added with ID: ${documentReference.id}")
                         Toast.makeText(this, "User added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
+
+                        val defaultWorkoutData = hashMapOf(
+                            MyFirestoreReferences.EMAIL_FIELD to email,
+                            MyFirestoreReferences.MONDAY_FIELD to false,
+                            MyFirestoreReferences.TUESDAY_FIELD to false,
+                            MyFirestoreReferences.WEDNESDAY_FIELD to false,
+                            MyFirestoreReferences.THURSDAY_FIELD to false,
+                            MyFirestoreReferences.FRIDAY_FIELD to false,
+                            MyFirestoreReferences.SATURDAY_FIELD to false,
+                            MyFirestoreReferences.SUNDAY_FIELD to false,
+
+                            MyFirestoreReferences.BICYCLE_CRUNCHES to "25",
+                            MyFirestoreReferences.BURPEES_FIELDS to "20",
+                            MyFirestoreReferences.DEADLIFT_FIELD to "45",
+                            MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD to "25",
+                            MyFirestoreReferences.HIGH_KNEES_FIELD to "15",
+                            MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD to "10",
+                            MyFirestoreReferences.PUSHUPS_FIELD to "15",
+                            MyFirestoreReferences.SQUATS_FIELD to "30",
+                            MyFirestoreReferences.JUMPING_JACKS_FIELD to "20",
+                            MyFirestoreReferences.ROWS_FIELD to "12",
+                            MyFirestoreReferences.JOG_MINUTES to "10"
+
+                        )
+
+                        userWorkoutRef.add(defaultWorkoutData)
+
 
                         val defaultProgressData = hashMapOf(
                             MyFirestoreReferences.EMAIL_FIELD to email,
