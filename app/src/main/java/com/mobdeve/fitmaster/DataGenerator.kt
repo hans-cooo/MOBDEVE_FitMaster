@@ -6,11 +6,11 @@ import kotlinx.coroutines.tasks.await
 
 class DataGenerator {
     companion object {
-        val db = Firebase.firestore
-        val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
-
         suspend fun generateDayStatuses(email: String): ArrayList<DayStatus> {
+            val db = Firebase.firestore
+            val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
             val tempList = ArrayList<DayStatus>()
+
             try {
                 val querySnapshot = statusRef.whereEqualTo("email", email).get().await()
                 if (!querySnapshot.isEmpty) {
