@@ -38,7 +38,7 @@ class RegisterAccount : AppCompatActivity() {
             val db = Firebase.firestore
 
             val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
-
+            val userProgressRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
 
             if(name.isEmpty() or birthday.isEmpty() or email.isEmpty() or password.isEmpty()){
                 Toast.makeText(this, "Fill Incomplete Fields", Toast.LENGTH_LONG).show()
@@ -58,10 +58,30 @@ class RegisterAccount : AppCompatActivity() {
                         // For successful upload
                         Log.d("RegisterAccount", "User added with ID: ${documentReference.id}")
                         Toast.makeText(this, "User added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, Dashboard::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intent)
-                        finish()
+
+                        val defaultProgressData = hashMapOf(
+                            MyFirestoreReferences.EMAIL_FIELD to email,
+                            MyFirestoreReferences.DAY_1_FIELD to "empty",
+                            MyFirestoreReferences.DAY_2_FIELD to "empty",
+                            MyFirestoreReferences.DAY_3_FIELD to "empty",
+                            MyFirestoreReferences.DAY_4_FIELD to "empty",
+                            MyFirestoreReferences.DAY_5_FIELD to "empty",
+                            MyFirestoreReferences.DAY_6_FIELD to "empty",
+                            MyFirestoreReferences.DAY_7_FIELD to "empty"
+                        )
+                        userProgressRef.add(defaultProgressData).addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val intent = Intent(this, Dashboard::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                intent.putExtra("email", email)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                // Handle the error
+                                Log.e("Firestore", "Error adding document", task.exception)
+                                Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                     .addOnFailureListener { e ->
                         // For failed upload
