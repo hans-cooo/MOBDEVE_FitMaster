@@ -17,7 +17,9 @@ class Profile : ComponentActivity() {
         this.viewBinding = ProfileBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         auth = FirebaseAuth.getInstance()
+        val email = this.intent.getStringExtra("email")
 
+        // Log Out Button
         viewBinding.btnLogout.setOnClickListener(){
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, MainActivity::class.java)
@@ -25,6 +27,7 @@ class Profile : ComponentActivity() {
             startActivity(intent)
         }
 
+        // Change Password Button
         viewBinding.tvwChangePassword.setOnClickListener(){
             if(auth.currentUser != null){
                 auth.sendPasswordResetEmail(auth.currentUser!!.email!!).addOnCompleteListener{ task ->

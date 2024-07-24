@@ -22,7 +22,7 @@ class Dashboard : AppCompatActivity() {
         val email = this.intent.getStringExtra("email")
         this.recyclerView = viewBinding.workoutDayRecycler
         this.recyclerView.layoutManager = LinearLayoutManager(this)
-        //TODO: Complete generateDayStatuses function in DataGenerator.kt and make it work with email
+
         CoroutineScope(Dispatchers.Main).launch {
             val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email.toString())
             recyclerView.adapter = DayStatusAdapter(dayList)
@@ -30,11 +30,13 @@ class Dashboard : AppCompatActivity() {
 
         viewBinding.imvProfile.setOnClickListener(){
             val intent = Intent(this, Profile::class.java)
+            intent.putExtra("email", email)
             startActivity(intent)
         }
 
         viewBinding.btnEdit.setOnClickListener(){
             val intent = Intent(this, EditWorkout::class.java)
+            intent.putExtra("email", email)
             startActivity(intent)
         }
 
