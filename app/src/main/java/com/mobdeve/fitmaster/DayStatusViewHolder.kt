@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -13,7 +14,14 @@ class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         btnDay.text = dayStatus.day
         // TODO: Might have to change this if imv becomes a string
         imvStatus.setImageResource(dayStatus.status)
-        /* something like this
+
+        btnDay.setOnClickListener {
+            // Get the context and start WorkoutActivity
+            val context = itemView.context
+            val intent = Intent(context, WorkoutActivity::class.java)
+            context.startActivity(intent)
+
+            /* something like this
         if (imvStatus = "empty") {
             imvStatus.setImageResource(R.drawable.status_empty)
         } else if (imvStatus = "complete") {
@@ -22,5 +30,6 @@ class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             imvStatus.setImageResource(R.drawable.status_error)
         }
          */
+        }
     }
 }

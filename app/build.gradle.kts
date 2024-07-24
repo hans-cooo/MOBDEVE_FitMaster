@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+
+
+
 }
 
 android {
@@ -78,4 +81,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.fitness) // Google Fit API
+    implementation(libs.play.services.base) // Base services
+
 }
+
+
+// Apply the Google Services plugin at the bottom of the file
+//plugins {
+  //  id("com.google.gms.google-services")
+//}
