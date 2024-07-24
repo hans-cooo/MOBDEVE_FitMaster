@@ -51,13 +51,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnSun"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="S"
+                    android:textOff="S"
+                    android:textOn="S"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -75,13 +77,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnMon"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="M"
+                    android:textOff="M"
+                    android:textOn="M"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -99,13 +103,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnTue"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="T"
+                    android:textOff="T"
+                    android:textOn="T"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -123,13 +129,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnWed"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="W"
+                    android:textOff="W"
+                    android:textOn="W"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -147,13 +155,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnThu"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="H"
+                    android:textOff="H"
+                    android:textOn="H"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,13 +181,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnFri"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="F"
+                    android:textOff="F"
+                    android:textOn="F"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -195,13 +207,15 @@
                 android:layout_weight="1">
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnSat"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/status_empty"
+                    android:background="@drawable/toggle_day"
                     android:text="S"
+                    android:textOff="S"
+                    android:textOn="S"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
