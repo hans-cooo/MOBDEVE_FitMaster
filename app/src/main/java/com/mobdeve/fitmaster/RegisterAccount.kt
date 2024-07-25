@@ -52,7 +52,9 @@ class RegisterAccount : AppCompatActivity() {
                     MyFirestoreReferences.USERNAME_FIELD to name,
                     MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
                     MyFirestoreReferences.EMAIL_FIELD to email,
-                    MyFirestoreReferences.PASSWORD_FIELD to password
+                    MyFirestoreReferences.PASSWORD_FIELD to password,
+                    MyFirestoreReferences.LEVEL_FIELD to "beginner",
+                    MyFirestoreReferences.GOAL_FIELD to "loseWeight"
                 )
                 usersRef.add(data)
                     .addOnSuccessListener { documentReference ->

@@ -13,6 +13,9 @@ object MyFirestoreReferences {
     const val PASSWORD_FIELD = "password"
     const val WEIGHT_FIELD = "weight"
     const val HEIGHT_FIELD = "height"
+    const val LEVEL_FIELD = "level"
+    const val GOAL_FIELD = "goal"
+    const val GOAL_WEIGHT_FIELD = "goalWeight"
 
     // UserProgress Fields
     const val DAY_1_FIELD = "Day1"
