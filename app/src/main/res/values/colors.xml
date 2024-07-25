@@ -11,4 +11,6 @@
     <color name="Dark_Gray">#FF696969</color>
     <color name="Light_Gray">#B1B1B1</color>
     <color name="Material_Black">#FF191919</color>
+    <color name="Material_White">#FFFAFAFA</color>
+    <color name="green">#45FF76</color>
 </resources>

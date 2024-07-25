@@ -1,10 +1,12 @@
 package com.mobdeve.fitmaster
 
 object MyFirestoreReferences {
+    // Collection References
     const val USERS_COLLECTION = "Users"
     const val USER_PROGRESS_COLLECTION = "UserProgress"
     const val USER_WORKOUT_COLLECTION = "UserWorkout"
 
+    // User Fields
     const val USERNAME_FIELD = "username"
     const val BIRTHDAY_FIELD = "birthday"
     const val EMAIL_FIELD = "email"

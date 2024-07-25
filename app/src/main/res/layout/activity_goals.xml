@@ -31,32 +31,38 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnBeginner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@drawable/level_button"
         android:text="@string/beginner"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textOff="@string/beginner"
+        android:textOn="@string/beginner" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnIntermediate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@drawable/level_button"
         android:text="@string/intermediate"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textOff="@string/intermediate"
+        android:textOn="@string/intermediate" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnAdvanced"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@android:color/white"
+        android:background="@drawable/level_button"
         android:text="@string/advanced"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textOff="@string/advanced"
+        android:textOn="@string/advanced" />
 
     <!-- Question "What's your goal?" -->
 
@@ -71,23 +77,27 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnWeightLoss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/black"
+        android:background="@drawable/goal_button"
         android:text="@string/weight_loss"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textOff="@string/weight_loss"
+        android:textOn="@string/weight_loss" />
 
     <Button
         android:id="@+id/btnGainMuscles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@android:color/black"
+        android:background="@drawable/goal_button"
         android:text="@string/gain_muscles"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textOff="@string/gain_muscles"
+        android:textOn="@string/gain_muscles" />
 
     <!-- Question "What's your Target Weight?" -->
     <TextView
@@ -114,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#178AE2"
+        android:background="@color/blue_button"
         android:text="@string/save"
         android:textColor="#F8F8F8"
         tools:ignore="TextContrastCheck" />

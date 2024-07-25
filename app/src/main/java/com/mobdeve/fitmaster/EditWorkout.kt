@@ -26,38 +26,36 @@ class EditWorkout : AppCompatActivity() {
         val workoutRef = db.collection(MyFirestoreReferences.USER_WORKOUT_COLLECTION)
         val query = workoutRef.whereEqualTo("email", email)
 
-        if (email != null) {
-            query.get().addOnSuccessListener { documents ->
-                if (documents != null && !documents.isEmpty) {
-                    val document = documents.first()
-                    val benchHint = document.getString(MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD) ?: "50"
-                    val incHint = document.getString(MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD) ?: "50"
-                    val deadHint = document.getString(MyFirestoreReferences.DEADLIFT_FIELD) ?: "50"
-                    val rowHint = document.getString(MyFirestoreReferences.ROWS_FIELD) ?: "50"
-                    val squatHint = document.getString(MyFirestoreReferences.SQUATS_FIELD) ?: "50"
-                    val jumpHint = document.getString(MyFirestoreReferences.JUMPING_JACKS_FIELD) ?: "50"
-                    val bicycleHint = document.getString(MyFirestoreReferences.BICYCLE_CRUNCHES) ?: "50"
-                    val burpeeHint = document.getString(MyFirestoreReferences.BURPEES_FIELDS) ?: "50"
-                    val pushupHint = document.getString(MyFirestoreReferences.PUSHUPS_FIELD) ?: "50"
-                    val kneeHint = document.getString(MyFirestoreReferences.HIGH_KNEES_FIELD) ?: "50"
+        query.get().addOnSuccessListener { documents ->
+            if (documents != null && !documents.isEmpty) {
+                val document = documents.first()
+                val benchHint = document.getString(MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD) ?: "50"
+                val incHint = document.getString(MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD) ?: "50"
+                val deadHint = document.getString(MyFirestoreReferences.DEADLIFT_FIELD) ?: "50"
+                val rowHint = document.getString(MyFirestoreReferences.ROWS_FIELD) ?: "50"
+                val squatHint = document.getString(MyFirestoreReferences.SQUATS_FIELD) ?: "50"
+                val jumpHint = document.getString(MyFirestoreReferences.JUMPING_JACKS_FIELD) ?: "50"
+                val bicycleHint = document.getString(MyFirestoreReferences.BICYCLE_CRUNCHES) ?: "50"
+                val burpeeHint = document.getString(MyFirestoreReferences.BURPEES_FIELDS) ?: "50"
+                val pushupHint = document.getString(MyFirestoreReferences.PUSHUPS_FIELD) ?: "50"
+                val kneeHint = document.getString(MyFirestoreReferences.HIGH_KNEES_FIELD) ?: "50"
 
-                    viewBinding.edtDumbbellBenchPress.hint = benchHint
-                    viewBinding.edtInclinedBenchPress.hint = incHint
-                    viewBinding.edtDeadlift.hint = deadHint
-                    viewBinding.edtRows.hint = rowHint
-                    viewBinding.edtSquat.hint = squatHint
-                    viewBinding.edtJumpingJacks.hint = jumpHint
-                    viewBinding.edtBicycleCrunches.hint = bicycleHint
-                    viewBinding.edtBurpees.hint = burpeeHint
-                    viewBinding.edtPushups.hint = pushupHint
-                    viewBinding.edtHighKnees.hint = kneeHint
+                viewBinding.edtDumbbellBenchPress.hint = benchHint
+                viewBinding.edtInclinedBenchPress.hint = incHint
+                viewBinding.edtDeadlift.hint = deadHint
+                viewBinding.edtRows.hint = rowHint
+                viewBinding.edtSquat.hint = squatHint
+                viewBinding.edtJumpingJacks.hint = jumpHint
+                viewBinding.edtBicycleCrunches.hint = bicycleHint
+                viewBinding.edtBurpees.hint = burpeeHint
+                viewBinding.edtPushups.hint = pushupHint
+                viewBinding.edtHighKnees.hint = kneeHint
 
-                } else {
-                    Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
-                }
-            }.addOnFailureListener { exception ->
-                Toast.makeText(this, "Error fetching profile: ${exception.message}", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
             }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(this, "Error fetching profile: ${exception.message}", Toast.LENGTH_LONG).show()
         }
 
         // Set up ToggleButton listeners
