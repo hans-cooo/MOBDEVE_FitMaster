@@ -41,6 +41,11 @@ class Goals : AppCompatActivity() {
             }
         }
 
+        query.get().addOnSuccessListener { documents ->
+            val goalWeight = documents.first().getString(MyFirestoreReferences.GOAL_WEIGHT_FIELD)
+            viewBinding.etTargetWeight.hint = "$goalWeight kg" ?: "Enter target weight in kg"
+        }
+
         viewBinding.btnBeginner.setOnClickListener {
             if (viewBinding.btnBeginner.isChecked) {
                 viewBinding.btnIntermediate.isChecked = false
@@ -76,11 +81,36 @@ class Goals : AppCompatActivity() {
 
         viewBinding.btnSave.setOnClickListener {
 
-            val intent = Intent(this, Profile::class.java)
-            intent.putExtra("email", email)
-            startActivity(intent)
-            finish()
-        }
+            val newLevel = when {
+                viewBinding.btnBeginner.isChecked -> "beginner"
+                viewBinding.btnIntermediate.isChecked -> "intermediate"
+                viewBinding.btnAdvanced.isChecked -> "advanced"
+                else -> "beginner"
+            }
 
+            val newGoal = when {
+                viewBinding.btnWeightLoss.isChecked -> "loseWeight"
+                viewBinding.btnGainMuscles.isChecked -> "gainMuscle"
+                else -> "loseWeight"
+            }
+
+            val targetWeight = viewBinding.etTargetWeight.text.toString()
+
+            query.get().addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val userId = document.id
+                    usersRef.document(userId).update(MyFirestoreReferences.LEVEL_FIELD, newLevel)
+                    usersRef.document(userId).update(MyFirestoreReferences.GOAL_FIELD, newGoal)
+                    if(targetWeight.isNotBlank()){
+                        usersRef.document(userId).update(MyFirestoreReferences.GOAL_WEIGHT_FIELD, targetWeight)
+                    }
+                }
+
+                val intent = Intent(this, Profile::class.java)
+                intent.putExtra("email", email)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }
