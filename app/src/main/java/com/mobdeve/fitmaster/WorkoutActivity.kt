@@ -1,6 +1,7 @@
 package com.mobdeve.fitmaster
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,14 +18,19 @@ import kotlinx.coroutines.launch
 class WorkoutActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityWorkoutBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var countDownTimer: CountDownTimer
+    private var isTimerRunning = false
+    private var timeLeftInMillis = 900000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         this.viewBinding = ActivityWorkoutBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
         val email = this.intent.getStringExtra("email")
         val day = this.intent.getStringExtra("day") // The day that was pressed
+
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
         val workoutRef = db.collection(MyFirestoreReferences.USER_WORKOUT_COLLECTION)
@@ -70,7 +76,7 @@ class WorkoutActivity : AppCompatActivity() {
         }
 
         viewBinding.btnFinWorkout.setOnClickListener(){
-            // TODO: Make this go to summary
+            // TODO: Make this go to summary and complete any other logic relating to the workout ending
             // remember to finish() after the intent and finish() when going from summary to dashboard
         }
 
@@ -85,6 +91,17 @@ class WorkoutActivity : AppCompatActivity() {
         // Initialize RecyclerView
         this.recyclerView = viewBinding.exerciseRecycler
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Timer
+        viewBinding.btnStartTimer.setOnClickListener {
+            if (!isTimerRunning) {
+                startTimer()
+                viewBinding.btnStartTimer.text = "Pause"
+            } else {
+                pauseTimer()
+                viewBinding.btnStartTimer.text = "Start"
+            }
+        }
 
     }
 
@@ -101,5 +118,29 @@ class WorkoutActivity : AppCompatActivity() {
             val exerciseList: ArrayList<ExcerciseData> = DataGenerator.generateGainMuscleExercises(reps, benchPress, inclineBenchPress, squat, row, deadlift)
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
+    }
+
+    private fun startTimer() {
+        countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                val minutes = millisUntilFinished / 1000 / 60
+                val seconds = (millisUntilFinished / 1000 % 60).toString().padStart(2, '0')
+                viewBinding.tvTimer.text = "$minutes:$seconds"
+            }
+
+            override fun onFinish() {
+                viewBinding.tvTimer.text = "0:00"
+                viewBinding.btnTimerFinish.isChecked = true
+                isTimerRunning = false
+                viewBinding.btnStartTimer.text = "Start"
+            }
+        }.start()
+        isTimerRunning = true
+    }
+
+    private fun pauseTimer() {
+        countDownTimer?.cancel()
+        isTimerRunning = false
     }
 }
