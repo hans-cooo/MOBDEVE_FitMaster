@@ -9,6 +9,8 @@ object MyFirestoreReferences {
     const val BIRTHDAY_FIELD = "birthday"
     const val EMAIL_FIELD = "email"
     const val PASSWORD_FIELD = "password"
+    const val WEIGHT_FIELD = "weight"
+    const val HEIGHT_FIELD = "height"
 
     // UserProgress Fields
     const val DAY_1_FIELD = "Day1"

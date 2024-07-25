@@ -12,7 +12,6 @@ class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindData(dayStatus: DayStatus) {
         btnDay.text = dayStatus.day
-        // TODO: Might have to change this if imv becomes a string
         imvStatus.setImageResource(dayStatus.status)
 
         btnDay.setOnClickListener {
@@ -21,15 +20,6 @@ class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val intent = Intent(context, WorkoutActivity::class.java)
             context.startActivity(intent)
 
-            /* something like this
-        if (imvStatus = "empty") {
-            imvStatus.setImageResource(R.drawable.status_empty)
-        } else if (imvStatus = "complete") {
-            imvStatus.setImageResource(R.drawable.status_complete)
-        } else {
-            imvStatus.setImageResource(R.drawable.status_error)
-        }
-         */
         }
     }
 }

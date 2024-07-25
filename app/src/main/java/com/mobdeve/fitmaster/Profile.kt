@@ -56,13 +56,13 @@ class Profile : ComponentActivity() {
             val updatedData = mutableMapOf<String, Any>()
 
             if (updatedBirthday.isNotBlank()) {
-                updatedData["birthday"] = updatedBirthday
+                updatedData[MyFirestoreReferences.BIRTHDAY_FIELD] = updatedBirthday
             }
             if (updatedWeight.isNotBlank()) {
-                updatedData["weight"] = updatedWeight
+                updatedData[MyFirestoreReferences.WEIGHT_FIELD] = updatedWeight
             }
             if (updatedHeight.isNotBlank()) {
-                updatedData["height"] = updatedHeight
+                updatedData[MyFirestoreReferences.HEIGHT_FIELD] = updatedHeight
             }
 
             // Query for the document where email matches and update it
