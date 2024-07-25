@@ -28,11 +28,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvExerciseDuration"
+            android:id="@+id/tvExerciseWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semibold"
-            android:text="Duration"
+            android:text="Weight"
             android:textColor="@color/Material_Black"
             android:textSize="16sp" />
 
@@ -52,15 +52,16 @@
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@drawable/status_complete"
-            android:contentDescription="button"
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/workout_confirmation"
+            android:text="ToggleButton"
+            android:textOff=" "
+            android:textOn=" "
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

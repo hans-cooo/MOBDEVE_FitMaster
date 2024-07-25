@@ -43,4 +43,5 @@
     <string name="burpees">Burpees</string>
     <string name="jog">Jog</string>
     <string name="reps">reps</string>
+    <string name="weight">Weight</string>
 </resources>

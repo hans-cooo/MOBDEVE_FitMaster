@@ -10,7 +10,7 @@ class ExerciseAdapter(private val exercises: List<ExcerciseData>) : RecyclerView
     class ExerciseViewHolder(private val binding: ExerciseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(exercise: ExcerciseData) {
             binding.tvExerciseName.text = exercise.name
-            binding.tvExerciseDuration.text = exercise.weight
+            binding.tvExerciseWeight.text = exercise.weight
             binding.tvExerciseReps.text = exercise.repetitions
         }
     }
