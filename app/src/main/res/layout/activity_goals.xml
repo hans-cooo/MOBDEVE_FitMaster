@@ -88,7 +88,7 @@
         android:textOff="@string/weight_loss"
         android:textOn="@string/weight_loss" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnGainMuscles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
