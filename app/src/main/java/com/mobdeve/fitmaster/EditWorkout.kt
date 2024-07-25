@@ -36,7 +36,7 @@ class EditWorkout : AppCompatActivity() {
                 val squatHint = document.getString(MyFirestoreReferences.SQUATS_FIELD) ?: "50"
                 val jumpHint = document.getString(MyFirestoreReferences.JUMPING_JACKS_FIELD) ?: "50"
                 val bicycleHint = document.getString(MyFirestoreReferences.BICYCLE_CRUNCHES) ?: "50"
-                val burpeeHint = document.getString(MyFirestoreReferences.BURPEES_FIELDS) ?: "50"
+                val burpeeHint = document.getString(MyFirestoreReferences.BURPEES_FIELD) ?: "50"
                 val pushupHint = document.getString(MyFirestoreReferences.PUSHUPS_FIELD) ?: "50"
                 val kneeHint = document.getString(MyFirestoreReferences.HIGH_KNEES_FIELD) ?: "50"
 
@@ -102,7 +102,7 @@ class EditWorkout : AppCompatActivity() {
                 updatedWorkoutData[MyFirestoreReferences.BICYCLE_CRUNCHES] = updatedBicycleCrunches
             }
             if(updatedBurpees.isNotBlank()){
-                updatedWorkoutData[MyFirestoreReferences.BURPEES_FIELDS] = updatedBurpees
+                updatedWorkoutData[MyFirestoreReferences.BURPEES_FIELD] = updatedBurpees
             }
             if(updatedPushups.isNotBlank()){
                 updatedWorkoutData[MyFirestoreReferences.PUSHUPS_FIELD] = updatedPushups

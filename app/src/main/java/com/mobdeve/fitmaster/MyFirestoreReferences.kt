@@ -40,7 +40,7 @@ object MyFirestoreReferences {
     const val ROWS_FIELD = "rows"
     const val PUSHUPS_FIELD = "Pushups"
     const val BICYCLE_CRUNCHES = "BicycleCrunches"
-    const val BURPEES_FIELDS = "Burpees"
+    const val BURPEES_FIELD = "Burpees"
     const val DUMBELL_BENCH_PRESS_FIELD = "DumbbellBenchPress"
     const val HIGH_KNEES_FIELD = "HighKnees"
     const val INCLINED_BENCH_PRESS_FIELD = "InclinedBenchPress"

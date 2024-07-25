@@ -73,7 +73,7 @@ class RegisterAccount : AppCompatActivity() {
                             MyFirestoreReferences.SUNDAY_FIELD to false,
 
                             MyFirestoreReferences.BICYCLE_CRUNCHES to "25",
-                            MyFirestoreReferences.BURPEES_FIELDS to "20",
+                            MyFirestoreReferences.BURPEES_FIELD to "20",
                             MyFirestoreReferences.DEADLIFT_FIELD to "45",
                             MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD to "25",
                             MyFirestoreReferences.HIGH_KNEES_FIELD to "15",
