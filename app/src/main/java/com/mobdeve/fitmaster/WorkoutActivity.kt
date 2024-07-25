@@ -7,18 +7,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mobdeve.fitmaster.databinding.ActivityWorkoutBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WorkoutActivity : AppCompatActivity() {
-
+    private lateinit var viewBinding: ActivityWorkoutBinding
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_workout)
+        this.viewBinding = ActivityWorkoutBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+        val email = this.intent.getStringExtra("email")
 
         // Set up Window Insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -28,7 +31,7 @@ class WorkoutActivity : AppCompatActivity() {
         }
 
         // Initialize RecyclerView
-        recyclerView = findViewById(R.id.exerciseRecycler)
+        this.recyclerView = viewBinding.exerciseRecycler
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Fetch and set data to RecyclerView

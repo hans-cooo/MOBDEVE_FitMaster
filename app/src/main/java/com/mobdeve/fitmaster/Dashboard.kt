@@ -25,7 +25,7 @@ class Dashboard : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email.toString())
-            recyclerView.adapter = DayStatusAdapter(dayList)
+            recyclerView.adapter = DayStatusAdapter(dayList, email.toString())
         }
 
         viewBinding.imvProfile.setOnClickListener(){

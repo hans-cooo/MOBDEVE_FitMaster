@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class DayStatusViewHolder(itemView: View, private val email: String) : RecyclerView.ViewHolder(itemView) {
     private val btnDay: Button = itemView.findViewById(R.id.btnDay)
     private val imvStatus: ImageView = itemView.findViewById(R.id.imvStatus)
 
@@ -15,9 +15,10 @@ class DayStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         imvStatus.setImageResource(dayStatus.status)
 
         btnDay.setOnClickListener {
-            // Get the context and start WorkoutActivity
+
             val context = itemView.context
             val intent = Intent(context, WorkoutActivity::class.java)
+            intent.putExtra("email", email)
             context.startActivity(intent)
 
         }
