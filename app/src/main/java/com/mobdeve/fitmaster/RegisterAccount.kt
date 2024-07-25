@@ -56,6 +56,7 @@ class RegisterAccount : AppCompatActivity() {
                                 Toast.makeText(this, "Email already exists.", Toast.LENGTH_LONG)
                                     .show()
                             } else {
+                                // Creates the account
                                 val data = hashMapOf(
                                     MyFirestoreReferences.USERNAME_FIELD to name,
                                     MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
@@ -148,10 +149,7 @@ class RegisterAccount : AppCompatActivity() {
                             }
                         }
                     }
-
             }
-
         }
-
     }
 }

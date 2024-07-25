@@ -24,6 +24,7 @@ class WorkoutActivity : AppCompatActivity() {
         this.viewBinding = ActivityWorkoutBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         val email = this.intent.getStringExtra("email")
+        val day = this.intent.getStringExtra("day") // The day that was pressed
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
         val workoutRef = db.collection(MyFirestoreReferences.USER_WORKOUT_COLLECTION)

@@ -19,6 +19,7 @@ class DayStatusViewHolder(itemView: View, private val email: String) : RecyclerV
             val context = itemView.context
             val intent = Intent(context, WorkoutActivity::class.java)
             intent.putExtra("email", email)
+            intent.putExtra("day", dayStatus.day) // Passes name of the day (Day1) to WorkoutActivity
             context.startActivity(intent)
 
         }
