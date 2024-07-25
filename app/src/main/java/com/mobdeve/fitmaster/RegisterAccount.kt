@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 import com.mobdeve.fitmaster.databinding.RegisterAccountBinding
 
@@ -41,86 +42,116 @@ class RegisterAccount : AppCompatActivity() {
             val userProgressRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
             val userWorkoutRef = db.collection(MyFirestoreReferences.USER_WORKOUT_COLLECTION)
 
-            if(name.isEmpty() or birthday.isEmpty() or email.isEmpty() or password.isEmpty()){
+            if (name.isEmpty() or birthday.isEmpty() or email.isEmpty() or password.isEmpty()) {
                 Toast.makeText(this, "Fill Incomplete Fields", Toast.LENGTH_LONG).show()
-            }
-            else if(password.length < 6){
-                Toast.makeText(this, "Password should be at least 6 characters.", Toast.LENGTH_LONG).show()
-            }
-            else{
-                val data = hashMapOf(
-                    MyFirestoreReferences.USERNAME_FIELD to name,
-                    MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
-                    MyFirestoreReferences.EMAIL_FIELD to email,
-                    MyFirestoreReferences.PASSWORD_FIELD to password,
-                    MyFirestoreReferences.LEVEL_FIELD to "beginner",
-                    MyFirestoreReferences.GOAL_FIELD to "loseWeight"
-                )
-                usersRef.add(data)
-                    .addOnSuccessListener { documentReference ->
-                        // For successful upload
-                        Log.d("RegisterAccount", "User added with ID: ${documentReference.id}")
-                        Toast.makeText(this, "User added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
-
-                        val defaultWorkoutData = hashMapOf(
-                            MyFirestoreReferences.EMAIL_FIELD to email,
-                            MyFirestoreReferences.MONDAY_FIELD to false,
-                            MyFirestoreReferences.TUESDAY_FIELD to false,
-                            MyFirestoreReferences.WEDNESDAY_FIELD to false,
-                            MyFirestoreReferences.THURSDAY_FIELD to false,
-                            MyFirestoreReferences.FRIDAY_FIELD to false,
-                            MyFirestoreReferences.SATURDAY_FIELD to false,
-                            MyFirestoreReferences.SUNDAY_FIELD to false,
-
-                            MyFirestoreReferences.BICYCLE_CRUNCHES to "25",
-                            MyFirestoreReferences.BURPEES_FIELD to "20",
-                            MyFirestoreReferences.DEADLIFT_FIELD to "45",
-                            MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD to "25",
-                            MyFirestoreReferences.HIGH_KNEES_FIELD to "15",
-                            MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD to "10",
-                            MyFirestoreReferences.PUSHUPS_FIELD to "15",
-                            MyFirestoreReferences.SQUATS_FIELD to "30",
-                            MyFirestoreReferences.JUMPING_JACKS_FIELD to "20",
-                            MyFirestoreReferences.ROWS_FIELD to "12",
-                            MyFirestoreReferences.JOG_MINUTES to "10"
-
-                        )
-
-                        userWorkoutRef.add(defaultWorkoutData)
-
-
-                        val defaultProgressData = hashMapOf(
-                            MyFirestoreReferences.EMAIL_FIELD to email,
-                            MyFirestoreReferences.DAY_1_FIELD to "empty",
-                            MyFirestoreReferences.DAY_2_FIELD to "empty",
-                            MyFirestoreReferences.DAY_3_FIELD to "empty",
-                            MyFirestoreReferences.DAY_4_FIELD to "empty",
-                            MyFirestoreReferences.DAY_5_FIELD to "empty",
-                            MyFirestoreReferences.DAY_6_FIELD to "empty",
-                            MyFirestoreReferences.DAY_7_FIELD to "empty"
-                        )
-                        userProgressRef.add(defaultProgressData).addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val intent = Intent(this, Dashboard::class.java)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                                intent.putExtra("email", email)
-                                startActivity(intent)
-                                finish()
+            } else if (password.length < 6) {
+                Toast.makeText(this, "Password should be at least 6 characters.", Toast.LENGTH_LONG)
+                    .show()
+            } else {
+                usersRef.whereEqualTo(MyFirestoreReferences.EMAIL_FIELD, email).get()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val documents: QuerySnapshot? = task.result
+                            if (documents != null && !documents.isEmpty) {
+                                Toast.makeText(this, "Email already exists.", Toast.LENGTH_LONG)
+                                    .show()
                             } else {
-                                // Handle the error
-                                Log.e("Firestore", "Error adding document", task.exception)
-                                Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
+                                val data = hashMapOf(
+                                    MyFirestoreReferences.USERNAME_FIELD to name,
+                                    MyFirestoreReferences.BIRTHDAY_FIELD to birthday,
+                                    MyFirestoreReferences.EMAIL_FIELD to email,
+                                    MyFirestoreReferences.PASSWORD_FIELD to password,
+                                    MyFirestoreReferences.LEVEL_FIELD to "beginner",
+                                    MyFirestoreReferences.GOAL_FIELD to "loseWeight"
+                                )
+                                usersRef.add(data)
+                                    .addOnSuccessListener { documentReference ->
+                                        // For successful upload
+                                        Log.d(
+                                            "RegisterAccount",
+                                            "User added with ID: ${documentReference.id}"
+                                        )
+                                        Toast.makeText(
+                                            this,
+                                            "User added with ID: ${documentReference.id}",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        val defaultWorkoutData = hashMapOf(
+                                            MyFirestoreReferences.EMAIL_FIELD to email,
+                                            MyFirestoreReferences.MONDAY_FIELD to false,
+                                            MyFirestoreReferences.TUESDAY_FIELD to false,
+                                            MyFirestoreReferences.WEDNESDAY_FIELD to false,
+                                            MyFirestoreReferences.THURSDAY_FIELD to false,
+                                            MyFirestoreReferences.FRIDAY_FIELD to false,
+                                            MyFirestoreReferences.SATURDAY_FIELD to false,
+                                            MyFirestoreReferences.SUNDAY_FIELD to false,
+
+                                            MyFirestoreReferences.BICYCLE_CRUNCHES to "25",
+                                            MyFirestoreReferences.BURPEES_FIELD to "20",
+                                            MyFirestoreReferences.DEADLIFT_FIELD to "45",
+                                            MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD to "25",
+                                            MyFirestoreReferences.HIGH_KNEES_FIELD to "15",
+                                            MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD to "10",
+                                            MyFirestoreReferences.PUSHUPS_FIELD to "15",
+                                            MyFirestoreReferences.SQUATS_FIELD to "30",
+                                            MyFirestoreReferences.JUMPING_JACKS_FIELD to "20",
+                                            MyFirestoreReferences.ROWS_FIELD to "12",
+                                            MyFirestoreReferences.JOG_MINUTES to "10"
+
+                                        )
+
+                                        userWorkoutRef.add(defaultWorkoutData)
+
+
+                                        val defaultProgressData = hashMapOf(
+                                            MyFirestoreReferences.EMAIL_FIELD to email,
+                                            MyFirestoreReferences.DAY_1_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_2_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_3_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_4_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_5_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_6_FIELD to "empty",
+                                            MyFirestoreReferences.DAY_7_FIELD to "empty"
+                                        )
+                                        userProgressRef.add(defaultProgressData)
+                                            .addOnCompleteListener { task ->
+                                                if (task.isSuccessful) {
+                                                    val intent = Intent(this, Dashboard::class.java)
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                    intent.putExtra("email", email)
+                                                    startActivity(intent)
+                                                    finish()
+                                                } else {
+                                                    // Handle the error
+                                                    Log.e(
+                                                        "Firestore",
+                                                        "Error adding document",
+                                                        task.exception
+                                                    )
+                                                    Toast.makeText(
+                                                        this,
+                                                        "Failed to save data",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            }
+                                    }
+                                    .addOnFailureListener { e ->
+                                        // For failed upload
+                                        Toast.makeText(
+                                            this,
+                                            "Error adding user: ${e.message}",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                             }
                         }
                     }
-                    .addOnFailureListener { e ->
-                        // For failed upload
-                        Toast.makeText(this, "Error adding user: ${e.message}", Toast.LENGTH_LONG).show()
-                    }
+
             }
+
         }
-
-
 
     }
 }

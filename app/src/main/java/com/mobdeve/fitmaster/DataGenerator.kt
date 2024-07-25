@@ -36,7 +36,7 @@ class DataGenerator {
                 else -> R.drawable.status_error
             }
         }
-        
+
         // Generates lose weight exercises
         fun generateLoseWeightExercises(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String): ArrayList<ExcerciseData> {
             val exercises = ArrayList<ExcerciseData>()

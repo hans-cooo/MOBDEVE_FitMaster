@@ -68,6 +68,10 @@ class WorkoutActivity : AppCompatActivity() {
             }
         }
 
+        viewBinding.btnFinWorkout.setOnClickListener(){
+            // TODO: Make this go to summary
+            // remember to finish() after the intent and finish() when going from summary to dashboard
+        }
 
 
         // Set up Window Insets
