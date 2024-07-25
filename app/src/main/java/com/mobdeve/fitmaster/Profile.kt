@@ -46,6 +46,13 @@ class Profile : ComponentActivity() {
             }
         }
 
+        viewBinding.btnSetGoals.setOnClickListener  {
+            val intent = Intent(this, Goals::class.java)
+            intent.putExtra("email", email)
+            startActivity(intent)
+            finish()
+        }
+
         viewBinding.btnSaveChanges.setOnClickListener {
             // Get the updated data from EditText fields
             val updatedBirthday = viewBinding.edtProfileBDay.text.toString()
