@@ -24,6 +24,7 @@ class WorkoutActivity : AppCompatActivity() {
     private var timeLeftInMillis = 900000L
     private var isWorkoutStarted = false
     private var startTime = 0L
+    private val exercises = ArrayList<ExerciseData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,27 @@ class WorkoutActivity : AppCompatActivity() {
 
             workoutQuery.get().addOnSuccessListener { documents2 ->
                 val document2 = documents2.first()
+
+                // Chooses exercise list based on goals
+                val exerciseList = when(goal){
+                    "loseWeight" -> MyFirestoreReferences.EXERCISE_LIST_LOSE_WEIGHT
+                    "gainMuscle" -> MyFirestoreReferences.EXERCISE_LIST_GAIN_MUSCLE
+                    else -> MyFirestoreReferences.EXERCISE_LIST
+                }
+                // Creates data for recyclerview
+                for (exerciseName in exerciseList){
+                    val value = document2.getString(exerciseName).toString()
+                    val name = MyFirestoreReferences.getName(exerciseName)
+                    if(goal == "loseWeight"){
+                        exercises.add(ExerciseData(name, "", value)) }
+                    else {
+                        exercises.add(ExerciseData(name, value, reps.toString())) }
+                }
+
+                viewBinding.exerciseRecycler.adapter = ExerciseAdapter(exercises)
+
+
+                /*
                 val benchPress = document2.getString(MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD)
                 val inclineBenchPress = document2.getString(MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD)
                 val squat = document2.getString(MyFirestoreReferences.SQUATS_FIELD)
@@ -69,12 +91,13 @@ class WorkoutActivity : AppCompatActivity() {
                 val pushups = document2.getString(MyFirestoreReferences.PUSHUPS_FIELD)
                 val jogMinutes = document2.getString(MyFirestoreReferences.JOG_MINUTES)
 
+
                 if(goal == "loseWeight"){
                     loseWeightRoutine(bicycleCrunches.toString(), burpees.toString(), jumpingJacks.toString(), highKnees.toString(), pushups.toString())
                 }else if(goal == "gainMuscle"){
                     gainMuscleRoutine(reps.toString(), benchPress.toString(), inclineBenchPress.toString(), squat.toString(), row.toString(), deadlift.toString())
                 }
-
+                */
             }
         }
 
@@ -171,7 +194,7 @@ class WorkoutActivity : AppCompatActivity() {
     }
 
     private fun pauseTimer() {
-        countDownTimer?.cancel()
+        countDownTimer.cancel()
         isTimerRunning = false
     }
 }

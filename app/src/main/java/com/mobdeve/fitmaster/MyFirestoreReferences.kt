@@ -46,4 +46,50 @@ object MyFirestoreReferences {
     const val INCLINED_BENCH_PRESS_FIELD = "InclinedBenchPress"
     const val DEADLIFT_FIELD = "deadlift"
     const val JOG_MINUTES = "jogMinutes"
+
+    val EXERCISE_LIST = listOf(
+        JUMPING_JACKS_FIELD,
+        SQUATS_FIELD,
+        ROWS_FIELD,
+        PUSHUPS_FIELD,
+        BICYCLE_CRUNCHES,
+        BURPEES_FIELD,
+        DUMBELL_BENCH_PRESS_FIELD,
+        HIGH_KNEES_FIELD,
+        INCLINED_BENCH_PRESS_FIELD,
+        DEADLIFT_FIELD
+        )
+
+    val EXERCISE_LIST_LOSE_WEIGHT = listOf(
+        JUMPING_JACKS_FIELD,
+        PUSHUPS_FIELD,
+        BICYCLE_CRUNCHES,
+        BURPEES_FIELD,
+        HIGH_KNEES_FIELD
+    )
+
+    val EXERCISE_LIST_GAIN_MUSCLE = listOf(
+        SQUATS_FIELD,
+        ROWS_FIELD,
+        DUMBELL_BENCH_PRESS_FIELD,
+        INCLINED_BENCH_PRESS_FIELD,
+        DEADLIFT_FIELD
+    )
+
+    fun getName(field: String) :String{
+        return when (field){
+            JUMPING_JACKS_FIELD -> "Jumping Jacks"
+            SQUATS_FIELD -> "Squats"
+            ROWS_FIELD -> "Rows"
+            PUSHUPS_FIELD -> "Push Ups"
+            BICYCLE_CRUNCHES -> "Bicycle Crunches"
+            BURPEES_FIELD -> "Burpees"
+            DUMBELL_BENCH_PRESS_FIELD -> "Dumbbell Bench Press"
+            HIGH_KNEES_FIELD -> "High Knees"
+            INCLINED_BENCH_PRESS_FIELD -> "Inclined Bench Press"
+            DEADLIFT_FIELD -> "Deadlift"
+            else -> ""
+
+        }
+    }
 }

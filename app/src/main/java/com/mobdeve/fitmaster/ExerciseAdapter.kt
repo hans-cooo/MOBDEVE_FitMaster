@@ -2,6 +2,7 @@ package com.mobdeve.fitmaster
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.fitmaster.databinding.ExerciseBinding
 
@@ -10,8 +11,13 @@ class ExerciseAdapter(private val exercises: List<ExerciseData>) : RecyclerView.
     class ExerciseViewHolder(private val binding: ExerciseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(exercise: ExerciseData) {
             binding.tvExerciseName.text = exercise.name
-            binding.tvExerciseWeight.text = exercise.weight
-            binding.tvExerciseReps.text = exercise.repetitions
+            if(exercise.weight.isNotBlank())
+                binding.tvExerciseWeight.text = "${exercise.weight} kg"
+            else {
+                binding.tvExerciseWeight.text = ""
+            }
+
+            binding.tvExerciseReps.text = "${exercise.repetitions} reps"
         }
     }
 

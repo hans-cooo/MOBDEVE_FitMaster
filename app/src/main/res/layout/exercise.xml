@@ -28,20 +28,20 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvExerciseWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_semibold"
-            android:text="Weight"
-            android:textColor="@color/Material_Black"
-            android:textSize="16sp" />
-
-        <TextView
             android:id="@+id/tvExerciseReps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semibold"
             android:text="Repetitions"
+            android:textColor="@color/Material_Black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvExerciseWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Weight"
             android:textColor="@color/Material_Black"
             android:textSize="16sp" />
 
