@@ -5,6 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dashboard_background"
+    android:backgroundTint="@color/Light_Gray"
+    android:backgroundTintMode="screen"
     tools:context=".EditWorkout">
 
     <LinearLayout
@@ -12,565 +15,622 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSaveWorkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvwManage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:text="Manage Workout"
-            android:textAlignment="center"
-            android:textColor="@color/Material_Black"
-            android:textSize="20sp" />
+            android:background="@drawable/dashboard_header">
 
-        <TextView
-            android:id="@+id/tvwDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/bebas_neue"
-            android:text="Days"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="7">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
+                android:orientation="vertical"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvwManage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="Manage Workout"
+                    android:textAlignment="center"
+                    android:textColor="@color/Gray"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/tvwDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="Notifications"
+                    android:textAlignment="center"
+                    android:textColor="@color/Gray"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
 
 
-                <ToggleButton
-                    android:id="@+id/btnSun"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="S"
-                    android:textOff="S"
-                    android:textOn="S"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ToggleButton
+                            android:id="@+id/btnSun"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="S"
+                            android:textOff="S"
+                            android:textOn="S"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
-
-
-                <ToggleButton
-                    android:id="@+id/btnMon"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="M"
-                    android:textOff="M"
-                    android:textOn="M"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
 
 
-                <ToggleButton
-                    android:id="@+id/btnTue"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="T"
-                    android:textOff="T"
-                    android:textOn="T"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ToggleButton
+                            android:id="@+id/btnMon"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="M"
+                            android:textOff="M"
+                            android:textOn="M"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
-
-
-                <ToggleButton
-                    android:id="@+id/btnWed"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="W"
-                    android:textOff="W"
-                    android:textOn="W"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
 
 
-                <ToggleButton
-                    android:id="@+id/btnThu"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="H"
-                    android:textOff="H"
-                    android:textOn="H"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ToggleButton
+                            android:id="@+id/btnTue"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="T"
+                            android:textOff="T"
+                            android:textOn="T"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
-
-
-                <ToggleButton
-                    android:id="@+id/btnFri"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="F"
-                    android:textOff="F"
-                    android:textOn="F"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
 
 
-                <ToggleButton
-                    android:id="@+id/btnSat"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_day"
-                    android:text="S"
-                    android:textOff="S"
-                    android:textOn="S"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ToggleButton
+                            android:id="@+id/btnWed"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="W"
+                            android:textOff="W"
+                            android:textOn="W"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
 
-        <View
+
+                        <ToggleButton
+                            android:id="@+id/btnThu"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="H"
+                            android:textOff="H"
+                            android:textOn="H"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
+
+
+                        <ToggleButton
+                            android:id="@+id/btnFri"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="F"
+                            android:textOff="F"
+                            android:textOn="F"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1">
+
+
+                        <ToggleButton
+                            android:id="@+id/btnSat"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_day"
+                            android:text="S"
+                            android:textOff="S"
+                            android:textOn="S"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="w,1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/Material_Black" />
-
-        <TextView
-            android:id="@+id/tvwMaxWeights"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/bebas_neue"
-            android:text="Max Weights"
-            android:textAlignment="center"
-            android:textColor="@color/Material_Black"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
+                android:layout_margin="10dp"
+                android:background="@drawable/button_lightgray"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/dumbbell"
+                    android:id="@+id/tvwMaxWeights"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dumbbell_bench_press" />
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="Max Weights"
+                    android:textAlignment="center"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="28sp" />
 
-                <EditText
-                    android:id="@+id/edtDumbbellBenchPress"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:id="@+id/dbkg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/kg"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/inclined"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/inclined_bench_press" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edtInclinedBenchPress"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dumbbell"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dumbbell_bench_press"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtDumbbellBenchPress"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/dbkg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/kg"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/inclined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/inclined_bench_press"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtInclinedBenchPress"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/kg"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/deadlift"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/deadlift"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtDeadlift"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/kg"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rows"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/rows"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtRows"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/kg"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/squat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/squat"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtSquat"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/kg"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/kg"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/deadlift"
+                    android:id="@+id/tvwMaxReps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/deadlift" />
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="Max Reps"
+                    android:textAlignment="center"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="28sp" />
 
-                <EditText
-                    android:id="@+id/edtDeadlift"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/kg"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/rows"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/rows" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edtRows"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/kg"
-                    android:textAlignment="viewStart" />
+                        <TextView
+                            android:id="@+id/bicycle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/bicycle_crunches"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtBicycleCrunches"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reps"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/burpees"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/burpees"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtBurpees"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reps"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/highknees"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/high_knees"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtHighKnees"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reps"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/jumpingjacks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/jumping_jacks"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtJumpingJacks"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reps"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/pushups"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/pushups"
+                            android:textColor="@color/Material_Black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtPushups"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="50"
+                            android:inputType="number"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reps"
+                            android:textAlignment="viewStart" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/squat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/squat" />
-
-                <EditText
-                    android:id="@+id/edtSquat"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/kg"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvwMaxReps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/bebas_neue"
-            android:text="Max Reps"
-            android:textAlignment="center"
-            android:textColor="@color/Material_Black"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/bicycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bicycle_crunches" />
-
-                <EditText
-                    android:id="@+id/edtBicycleCrunches"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reps"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/burpees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/burpees" />
-
-                <EditText
-                    android:id="@+id/edtBurpees"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reps"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/highknees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/high_knees" />
-
-                <EditText
-                    android:id="@+id/edtHighKnees"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reps"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/jumpingjacks"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/jumping_jacks" />
-
-                <EditText
-                    android:id="@+id/edtJumpingJacks"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reps"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/pushups"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pushups" />
-
-                <EditText
-                    android:id="@+id/edtPushups"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="50"
-                    android:inputType="number"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reps"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
@@ -580,7 +640,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/button_gray"
+        android:background="@drawable/button_blue"
         android:paddingLeft="20dp"
         android:paddingTop="6dp"
         android:paddingRight="20dp"
