@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -228,6 +229,7 @@ class WorkoutActivity : AppCompatActivity() {
 
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftInMillis = millisUntilFinished
                 val minutes = millisUntilFinished / 1000 / 60
@@ -261,8 +263,14 @@ class WorkoutActivity : AppCompatActivity() {
         editor.putLong("timeLeftInMillis", timeLeftInMillis)
         editor.putBoolean("isWorkoutStarted", isWorkoutStarted)
         editor.putLong("startTime", startTime)
-        val exercisesCompleted = getCompletedExercises()
-        editor.putStringSet("completedExercises", exercisesCompleted)
+
+        val completedExercises = mutableMapOf<Int, Boolean>() // Map index to checked state
+        for (i in 0 until recyclerView.childCount) {
+            val view = recyclerView.getChildAt(i)
+            val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
+            completedExercises[i] = toggleButton.isChecked
+        }
+        editor.putStringSet("completedExercises", completedExercises.map { "${it.key}:${it.value}" }.toSet())
         editor.apply()
     }
 
@@ -271,25 +279,28 @@ class WorkoutActivity : AppCompatActivity() {
         timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 900000L)
         isWorkoutStarted = sharedPreferences.getBoolean("isWorkoutStarted", false)
         startTime = sharedPreferences.getLong("startTime", 0L)
-        val completedExercises = sharedPreferences.getStringSet("completedExercises", emptySet())!!
+
+        val completedExercises = sharedPreferences.getStringSet("completedExercises", emptySet()) ?: emptySet()
+        val exerciseStates = completedExercises.associate {
+            val (index, state) = it.split(":")
+            index.toInt() to state.toBoolean()
+        }
 
         if (isTimerRunning) {
             startTimer()
             viewBinding.btnStartTimer.text = "Pause"
         } else {
-            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${
-                (timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')
-            }"
+            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${(timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')}"
         }
 
         if (isWorkoutStarted) {
             viewBinding.btnStartWorkout.isEnabled = false
         }
 
-        restoreCompletedExercises(completedExercises)
+        restoreCompletedExercises(exerciseStates)
     }
 
-    private fun getCompletedExercises(): Set<String> {
+    /*private fun getCompletedExercises(): Set<String> {
         val completedExercises = mutableSetOf<String>()
         for (i in 0 until recyclerView.childCount) {
             val view = recyclerView.layoutManager!!.findViewByPosition(i)
@@ -304,17 +315,17 @@ class WorkoutActivity : AppCompatActivity() {
         return completedExercises
     }
 
-    private fun restoreCompletedExercises(completedExercises: Set<String>) {
+     */
+
+    private fun restoreCompletedExercises(exerciseStates: Map<Int, Boolean>) {
         for (i in 0 until recyclerView.childCount) {
-            val view = recyclerView.layoutManager!!.findViewByPosition(i)
-            val toggleButton = view?.findViewById<ToggleButton>(R.id.tbnStatus)
-            if (completedExercises.contains(exercises[i].name)) {
-                toggleButton?.isChecked = true
-            }
+            val view = recyclerView.getChildAt(i)
+            val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
+            toggleButton.isChecked = exerciseStates[i] ?: false
         }
-        if (completedExercises.contains("TimerFinish")) {
+        if (exerciseStates.values.contains(true)) {
             viewBinding.btnTimerFinish.isChecked = true
         }
-
     }
+
 }
