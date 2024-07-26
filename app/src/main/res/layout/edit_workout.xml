@@ -9,10 +9,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveWorkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -414,163 +415,162 @@
             android:textColor="@color/Material_Black"
             android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bicycle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/bicycle_crunches" />
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtBicycleCrunches"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="50"
-                android:inputType="number"
-                android:textAlignment="textEnd" />
+                <TextView
+                    android:id="@+id/bicycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bicycle_crunches" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/reps"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edtBicycleCrunches"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/reps"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/burpees"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/burpees" />
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtBurpees"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="50"
-                android:inputType="number"
-                android:textAlignment="textEnd" />
+                <TextView
+                    android:id="@+id/burpees"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/burpees" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/reps"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edtBurpees"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/reps"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/highknees"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/high_knees" />
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtHighKnees"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="50"
-                android:inputType="number"
-                android:textAlignment="textEnd" />
+                <TextView
+                    android:id="@+id/highknees"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/high_knees" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/reps"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edtHighKnees"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/reps"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/jumpingjacks"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/jumping_jacks" />
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtJumpingJacks"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="50"
-                android:inputType="number"
-                android:textAlignment="textEnd" />
+                <TextView
+                    android:id="@+id/jumpingjacks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/jumping_jacks" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/reps"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edtJumpingJacks"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/reps"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/pushups"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/pushups" />
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtPushups"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="50"
-                android:inputType="number"
-                android:textAlignment="textEnd" />
+                <TextView
+                    android:id="@+id/pushups"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pushups" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/reps"
-                android:textAlignment="viewStart" />
+                <EditText
+                    android:id="@+id/edtPushups"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/reps"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
-
 
 
     </LinearLayout>
@@ -579,7 +579,7 @@
         android:id="@+id/btnSaveWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/button_gray"
         android:paddingLeft="20dp"
         android:paddingTop="6dp"
@@ -589,7 +589,7 @@
         android:textColor="@color/Gray"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent" />
