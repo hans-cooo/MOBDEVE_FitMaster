@@ -232,7 +232,6 @@ class WorkoutActivity : AppCompatActivity() {
         editor.putLong("timeLeftInMillis", timeLeftInMillis)
         editor.putBoolean("isWorkoutStarted", isWorkoutStarted)
         editor.putLong("startTime", startTime)
-
         val exercisesCompleted = getCompletedExercises()
         editor.putStringSet("completedExercises", exercisesCompleted)
         editor.apply()
