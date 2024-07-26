@@ -1,132 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tvGoalsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <!-- Title "Goals" -->
 
     <!-- Question "What's your fitness levels?" -->
 
     <!-- Fitness Level Options -->
-    <TextView
-        android:id="@+id/tvGoalsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="@string/goals"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/tvFitnessLevelsQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/whats_your_fitness_level"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <ToggleButton
-        android:id="@+id/btnBeginner"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/level_button"
-        android:text="@string/beginner"
-        android:textColor="@android:color/black"
-        android:textOff="@string/beginner"
-        android:textOn="@string/beginner" />
+        android:background="@drawable/dashboard_header">
 
-    <ToggleButton
-        android:id="@+id/btnIntermediate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/level_button"
-        android:text="@string/intermediate"
-        android:textColor="@android:color/black"
-        android:textOff="@string/intermediate"
-        android:textOn="@string/intermediate" />
+        <TextView
+            android:id="@+id/tvGoalsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bebas_neue"
+            android:text="@string/goals"
+            android:textColor="@color/Gray"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ToggleButton
-        android:id="@+id/btnAdvanced"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/level_button"
-        android:text="@string/advanced"
-        android:textColor="@android:color/black"
-        android:textOff="@string/advanced"
-        android:textOn="@string/advanced" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvFitnessHeightWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="What is your height and weight?"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/etEnterHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter height (cm)"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/etEnterWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/enter_weight_in_kg"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvFitnessLevelsQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/whats_your_fitness_level"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/btnBeginner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/level_button"
+            android:text="@string/beginner"
+            android:textColor="@android:color/black"
+            android:textOff="@string/beginner"
+            android:textOn="@string/beginner" />
+
+        <ToggleButton
+            android:id="@+id/btnIntermediate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/level_button"
+            android:text="@string/intermediate"
+            android:textColor="@android:color/black"
+            android:textOff="@string/intermediate"
+            android:textOn="@string/intermediate" />
+
+        <ToggleButton
+            android:id="@+id/btnAdvanced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/level_button"
+            android:text="@string/advanced"
+            android:textColor="@android:color/black"
+            android:textOff="@string/advanced"
+            android:textOn="@string/advanced" />
+
+        <TextView
+            android:id="@+id/tvGoalQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/what_s_your_goal"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/btnWeightLoss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/level_button"
+            android:text="@string/weight_loss"
+            android:textColor="@color/Material_Black"
+            android:textOff="@string/weight_loss"
+            android:textOn="@string/weight_loss" />
+
+        <ToggleButton
+            android:id="@+id/btnGainMuscles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/level_button"
+            android:text="@string/gain_muscles"
+            android:textColor="@color/Material_Black"
+            android:textOff="@string/gain_muscles"
+            android:textOn="@string/gain_muscles" />
+
+        <TextView
+            android:id="@+id/tvTargetWeightQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/what_s_your_target_weight"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etTargetWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_weight_in_kg"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/blue_button"
+            android:text="@string/save"
+            android:textColor="#F8F8F8"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
+    </LinearLayout>
 
     <!-- Question "What's your goal?" -->
 
     <!-- Goal Options -->
 
-    <TextView
-        android:id="@+id/tvGoalQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/what_s_your_goal"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <ToggleButton
-        android:id="@+id/btnWeightLoss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/goal_button"
-        android:text="@string/weight_loss"
-        android:textColor="@android:color/white"
-        android:textOff="@string/weight_loss"
-        android:textOn="@string/weight_loss" />
-
-    <ToggleButton
-        android:id="@+id/btnGainMuscles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/goal_button"
-        android:text="@string/gain_muscles"
-        android:textColor="@android:color/white"
-        android:textOff="@string/gain_muscles"
-        android:textOn="@string/gain_muscles" />
-
     <!-- Question "What's your Target Weight?" -->
-    <TextView
-        android:id="@+id/tvTargetWeightQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/what_s_your_target_weight"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
 
     <!-- Target Weight Input -->
-    <EditText
-        android:id="@+id/etTargetWeight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_weight_in_kg"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp" />
 
     <!-- Save Button -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/blue_button"
-        android:text="@string/save"
-        android:textColor="#F8F8F8"
-        tools:ignore="TextContrastCheck" />
 
 </LinearLayout>

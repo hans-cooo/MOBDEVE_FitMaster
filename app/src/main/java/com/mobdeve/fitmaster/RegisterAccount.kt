@@ -128,9 +128,13 @@ class RegisterAccount : AppCompatActivity() {
                                             .addOnCompleteListener { task ->
                                                 if (task.isSuccessful) {
                                                     val intent = Intent(this, Dashboard::class.java)
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                    val intent2 = Intent(this, Goals::class.java)
                                                     intent.putExtra("email", email)
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                    intent2.putExtra("email", email)
+                                                    intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                                     startActivity(intent)
+                                                    startActivity(intent2)
                                                     finish()
                                                 } else {
                                                     // Handle the error

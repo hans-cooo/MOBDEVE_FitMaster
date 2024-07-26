@@ -18,14 +18,14 @@
     <string name="date">MM/DD/YYYY</string>
     <string name="title_activity_profile">Profile</string>
     <string name="goals">Goals</string>
-    <string name="whats_your_fitness_level">What\'s your fitness level?</string>
+    <string name="whats_your_fitness_level">What is your fitness level?</string>
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediate</string>
     <string name="advanced">Advanced</string>
-    <string name="what_s_your_goal">What\'s your goal?</string>
+    <string name="what_s_your_goal">What is your goal?</string>
     <string name="weight_loss">Weight Loss</string>
     <string name="gain_muscles">Gain Muscles</string>
-    <string name="what_s_your_target_weight">What\'s your Target Weight?</string>
+    <string name="what_s_your_target_weight">What is your Target Weight?</string>
     <string name="save">Save</string>
     <string name="workout_plan">Workout Plan</string>
     <string name="edit_workout">Edit Workout</string>

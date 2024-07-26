@@ -2,6 +2,7 @@ package com.mobdeve.fitmaster
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -93,9 +94,33 @@ class Goals : AppCompatActivity() {
                 viewBinding.btnGainMuscles.isChecked -> "gainMuscle"
                 else -> "loseWeight"
             }
+            val updatedHeight = viewBinding.etEnterHeight.text.toString()
+            val updatedWeight = viewBinding.etEnterWeight.text.toString()
 
+            // Update height and weight
             val targetWeight = viewBinding.etTargetWeight.text.toString()
+            val updatedData = mutableMapOf<String, Any>()
+            if (updatedWeight.isNotBlank()) {
+                updatedData[MyFirestoreReferences.WEIGHT_FIELD] = updatedWeight
+            }
+            if (updatedHeight.isNotBlank()) {
+                updatedData[MyFirestoreReferences.HEIGHT_FIELD] = updatedHeight
+            }
 
+            usersRef.whereEqualTo("email", email).get().addOnSuccessListener { documents ->
+                if (documents != null && !documents.isEmpty) {
+                    val document = documents.first()
+                    val documentId = document.id
+
+                    usersRef.document(documentId).update(updatedData)
+                } else {
+                    Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error finding document: ${exception.message}", Toast.LENGTH_LONG).show()
+            }
+
+            // Update Goals
             query.get().addOnSuccessListener { documents ->
                 for (document in documents) {
                     val userId = document.id
