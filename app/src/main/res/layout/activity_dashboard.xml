@@ -6,11 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray"
+    android:focusable="false"
     tools:context=".Dashboard">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/dashboard_background"
+        android:backgroundTint="@color/Light_Gray"
+        android:backgroundTintMode="screen"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,8 +23,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1E1E1E"
-            android:padding="20dp">
+            android:background="@drawable/dashboard_header"
+            android:padding="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,28 +36,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/inter_bold"
+                    android:fontFamily="@font/bebas_neue"
                     android:text="Workout Plan"
                     android:textAlignment="center"
                     android:textColor="#e1e1e1"
-                    android:textSize="20sp" />
+                    android:textSize="34sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:padding="10dp"
                     android:weightSum="10">
 
                     <Button
                         android:id="@+id/btnEdit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:background="#4D4D4E"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_lightgray"
                         android:text="Edit Workout"
-                        android:textColor="@color/Gray" />
+                        android:textColor="@color/Material_Black"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imvProfile"

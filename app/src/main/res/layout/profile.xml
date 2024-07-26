@@ -5,6 +5,285 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_header">
+
+            <LinearLayout
+                android:id="@+id/profileheader"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvwProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="Profile"
+                    android:textColor="@color/Gray"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_red"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Log Out"
+                    android:textColor="@color/Gray"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imvProfileIcon"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/profile_user" />
+
+            <TextView
+                android:id="@+id/tvwBiometrics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="BIOMETRICS"
+                android:textAlignment="center"
+                android:textColor="@color/Material_Black"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvwProfileBDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Birthday"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtProfileBDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/edit_text_border"
+                    android:fontFamily="@font/inter_semibold"
+                    android:hint="@string/date"
+                    android:importantForAutofill="no"
+                    android:inputType="datetime|date"
+                    android:padding="15dp"
+                    android:textAlignment="viewEnd"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvwProfileWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Weight (kg)"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtProfileWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/edit_text_border"
+                    android:fontFamily="@font/inter_semibold"
+                    android:hint="Weight (kg)"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:textAlignment="viewEnd"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvwProfileHeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Height (cm)"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtProfileHeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/edit_text_border"
+                    android:fontFamily="@font/inter_semibold"
+                    android:hint="Height (cm)"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:textAlignment="viewEnd"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvwSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="SETTINGS"
+                android:textAlignment="center"
+                android:textColor="@color/Material_Black"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1.5
+    ">
+
+                    <ImageView
+                        android:id="@+id/imvLock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="true"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="w,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_lock" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvwChangePassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Change Password"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imvDark"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/icon_moon" />
+
+                <TextView
+                    android:id="@+id/tvwDarkMode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Dark Mode"
+                    android:textColor="@color/Material_Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/swtDarkMode"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnSetGoals"
         android:layout_width="160dp"
@@ -27,7 +306,7 @@
         android:id="@+id/btnSaveChanges"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button_blue"
         android:paddingLeft="20dp"
         android:paddingTop="6dp"
@@ -40,248 +319,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvwProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter_bold"
-                android:text="Profile"
-                android:textColor="@color/Material_Black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:background="@drawable/button_red"
-                android:text="Log Out"
-                android:textColor="@color/Gray"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imvProfileIcon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/profile_user" />
-
-        <TextView
-            android:id="@+id/tvwBiometrics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/bebas_neue"
-            android:text="BIOMETRICS"
-            android:textAlignment="center"
-            android:textColor="@color/Material_Black"
-            android:textSize="40sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/tvwProfileBDay"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:fontFamily="@font/montserrat"
-                android:text="Birthday"
-                android:textColor="@color/Material_Black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtProfileBDay"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@drawable/edit_text_border"
-                android:fontFamily="@font/inter_semibold"
-                android:hint="@string/date"
-                android:importantForAutofill="no"
-                android:inputType="datetime|date"
-                android:padding="15dp"
-                android:textAlignment="viewEnd"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/tvwProfileWeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:fontFamily="@font/montserrat"
-                android:text="Weight (kg)"
-                android:textColor="@color/Material_Black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtProfileWeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@drawable/edit_text_border"
-                android:fontFamily="@font/inter_semibold"
-                android:hint="Weight (kg)"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:padding="15dp"
-                android:textAlignment="viewEnd"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/tvwProfileHeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:fontFamily="@font/montserrat"
-                android:text="Height (cm)"
-                android:textColor="@color/Material_Black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtProfileHeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@drawable/edit_text_border"
-                android:fontFamily="@font/inter_semibold"
-                android:hint="Height (cm)"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:padding="15dp"
-                android:textAlignment="viewEnd"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvwSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/bebas_neue"
-            android:text="SETTINGS"
-            android:textAlignment="center"
-            android:textColor="@color/Material_Black"
-            android:textSize="40sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <ImageView
-                android:id="@+id/imvLock"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:padding="10dp"
-                app:srcCompat="@drawable/icon_lock" />
-
-            <TextView
-                android:id="@+id/tvwChangePassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5"
-                android:fontFamily="@font/montserrat"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Change Password"
-                android:textColor="@color/Material_Black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <ImageView
-                android:id="@+id/imvDark"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:padding="10dp"
-                app:srcCompat="@drawable/icon_moon" />
-
-            <TextView
-                android:id="@+id/tvwDarkMode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5"
-                android:fontFamily="@font/montserrat"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Dark Mode"
-                android:textColor="@color/Material_Black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/swtDarkMode"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="2"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
