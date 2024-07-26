@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -264,33 +263,50 @@ class WorkoutActivity : AppCompatActivity() {
         editor.putBoolean("isWorkoutStarted", isWorkoutStarted)
         editor.putLong("startTime", startTime)
 
+        // Save completed exercises
         val completedExercises = mutableMapOf<Int, Boolean>() // Map index to checked state
         for (i in 0 until recyclerView.childCount) {
             val view = recyclerView.getChildAt(i)
             val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
             completedExercises[i] = toggleButton.isChecked
         }
-        editor.putStringSet("completedExercises", completedExercises.map { "${it.key}:${it.value}" }.toSet())
+        editor.putStringSet(
+            "completedExercises",
+            completedExercises.map { "${it.key}:${it.value}" }.toSet()
+        )
         editor.apply()
     }
 
     private fun restoreProgress() {
+        // Restore timer and workout start state
         isTimerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
         timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 900000L)
         isWorkoutStarted = sharedPreferences.getBoolean("isWorkoutStarted", false)
         startTime = sharedPreferences.getLong("startTime", 0L)
 
-        val completedExercises = sharedPreferences.getStringSet("completedExercises", emptySet()) ?: emptySet()
-        val exerciseStates = completedExercises.associate {
-            val (index, state) = it.split(":")
-            index.toInt() to state.toBoolean()
-        }
+        // Restore completed exercises
+        val completedExercises =
+            sharedPreferences.getStringSet("completedExercises", emptySet()) ?: emptySet()
+        val exerciseStates = completedExercises.associate { entry ->
+            // Ensure each entry is in the format "index:state"
+            val parts = entry.split(":", limit = 2)
+            (if (parts.size == 2) {
+                val index = parts[0].toIntOrNull()
+                val state = parts[1].toBoolean()
+                index?.let { it to state }
+            } else {
+                null
+            })!!
+        }.filterKeys { it != null } // Ensure valid indices
 
+        // Update UI based on the restored states
         if (isTimerRunning) {
             startTimer()
             viewBinding.btnStartTimer.text = "Pause"
         } else {
-            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${(timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')}"
+            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${
+                (timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')
+            }"
         }
 
         if (isWorkoutStarted) {
@@ -300,32 +316,17 @@ class WorkoutActivity : AppCompatActivity() {
         restoreCompletedExercises(exerciseStates)
     }
 
-    /*private fun getCompletedExercises(): Set<String> {
-        val completedExercises = mutableSetOf<String>()
-        for (i in 0 until recyclerView.childCount) {
-            val view = recyclerView.layoutManager!!.findViewByPosition(i)
-            val toggleButton = view?.findViewById<ToggleButton>(R.id.tbnStatus)
-            if (toggleButton?.isChecked == true) {
-                completedExercises.add(exercises[i].name)
+    private fun restoreCompletedExercises(exerciseStates: Map<Int, Boolean>) {
+        // Ensure the exercise list and recycler view are properly synchronized
+        for ((index, isChecked) in exerciseStates) {
+            if (index in 0 until recyclerView.childCount) {
+                val view = recyclerView.getChildAt(index)
+                val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
+                toggleButton?.isChecked = isChecked
             }
         }
-        if (viewBinding.btnTimerFinish.isChecked) {
-            completedExercises.add("TimerFinish")
-        }
-        return completedExercises
-    }
-
-     */
-
-    private fun restoreCompletedExercises(exerciseStates: Map<Int, Boolean>) {
-        for (i in 0 until recyclerView.childCount) {
-            val view = recyclerView.getChildAt(i)
-            val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
-            toggleButton.isChecked = exerciseStates[i] ?: false
-        }
-        if (exerciseStates.values.contains(true)) {
+        if (exerciseStates.containsKey(totalExercises) && exerciseStates[totalExercises] == true) {
             viewBinding.btnTimerFinish.isChecked = true
         }
     }
-
 }
