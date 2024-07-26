@@ -1,6 +1,6 @@
 package com.mobdeve.fitmaster
 
-data class ExcerciseData(
+data class ExerciseData(
 
     val name: String,
     val weight: String,

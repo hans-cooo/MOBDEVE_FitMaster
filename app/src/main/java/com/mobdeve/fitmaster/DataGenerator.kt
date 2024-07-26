@@ -38,24 +38,24 @@ class DataGenerator {
         }
 
         // Generates lose weight exercises
-        fun generateLoseWeightExercises(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String): ArrayList<ExcerciseData> {
-            val exercises = ArrayList<ExcerciseData>()
-            exercises.add(ExcerciseData(name = "Bicycle Crunches", weight = "N/A", repetitions = "$bicycleCrunches reps"))
-            exercises.add(ExcerciseData(name = "Burpees", weight = "N/A", repetitions = "$burpees reps"))
-            exercises.add(ExcerciseData(name = "Jumping Jacks", weight = "N/A", repetitions = "$jumpingJacks reps"))
-            exercises.add(ExcerciseData(name = "High Knees", weight = "N/A", repetitions = "$highKnees reps"))
-            exercises.add(ExcerciseData(name = "Push-ups", weight = "N/A", repetitions = "$pushups reps"))
+        fun generateLoseWeightExercises(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String): ArrayList<ExerciseData> {
+            val exercises = ArrayList<ExerciseData>()
+            exercises.add(ExerciseData(name = "Bicycle Crunches", weight = "N/A", repetitions = "$bicycleCrunches reps"))
+            exercises.add(ExerciseData(name = "Burpees", weight = "N/A", repetitions = "$burpees reps"))
+            exercises.add(ExerciseData(name = "Jumping Jacks", weight = "N/A", repetitions = "$jumpingJacks reps"))
+            exercises.add(ExerciseData(name = "High Knees", weight = "N/A", repetitions = "$highKnees reps"))
+            exercises.add(ExerciseData(name = "Push-ups", weight = "N/A", repetitions = "$pushups reps"))
             return exercises
         }
 
         // Generates gain muscle exercises
-        fun generateGainMuscleExercises(reps: String, benchPress: String, inclineBenchPress: String, squat: String, row: String, deadlift: String): ArrayList<ExcerciseData> {
-            val exercises = ArrayList<ExcerciseData>()
-            exercises.add(ExcerciseData(name = "Bench Press", weight = "$benchPress kg", repetitions = "$reps reps"))
-            exercises.add(ExcerciseData(name = "Inclined Bench Press", weight = "$inclineBenchPress kg", repetitions = "$reps reps"))
-            exercises.add(ExcerciseData(name = "Squats", weight = "$squat kg", repetitions = "$reps reps"))
-            exercises.add(ExcerciseData(name = "Rows", weight = "$row kg", repetitions = "$reps reps"))
-            exercises.add(ExcerciseData(name = "Deadlift", weight = "$deadlift kg", repetitions = "$reps reps"))
+        fun generateGainMuscleExercises(reps: String, benchPress: String, inclineBenchPress: String, squat: String, row: String, deadlift: String): ArrayList<ExerciseData> {
+            val exercises = ArrayList<ExerciseData>()
+            exercises.add(ExerciseData(name = "Bench Press", weight = "$benchPress kg", repetitions = "$reps reps"))
+            exercises.add(ExerciseData(name = "Inclined Bench Press", weight = "$inclineBenchPress kg", repetitions = "$reps reps"))
+            exercises.add(ExerciseData(name = "Squats", weight = "$squat kg", repetitions = "$reps reps"))
+            exercises.add(ExerciseData(name = "Rows", weight = "$row kg", repetitions = "$reps reps"))
+            exercises.add(ExerciseData(name = "Deadlift", weight = "$deadlift kg", repetitions = "$reps reps"))
             return exercises
         }
     }

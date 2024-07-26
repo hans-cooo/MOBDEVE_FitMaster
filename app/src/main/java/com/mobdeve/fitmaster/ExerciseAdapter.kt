@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.fitmaster.databinding.ExerciseBinding
 
-class ExerciseAdapter(private val exercises: List<ExcerciseData>) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
+class ExerciseAdapter(private val exercises: List<ExerciseData>) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     class ExerciseViewHolder(private val binding: ExerciseBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindData(exercise: ExcerciseData) {
+        fun bindData(exercise: ExerciseData) {
             binding.tvExerciseName.text = exercise.name
             binding.tvExerciseWeight.text = exercise.weight
             binding.tvExerciseReps.text = exercise.repetitions

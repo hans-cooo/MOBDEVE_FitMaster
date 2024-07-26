@@ -138,7 +138,7 @@ class WorkoutActivity : AppCompatActivity() {
 
     private fun loseWeightRoutine(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String){
         CoroutineScope(Dispatchers.Main).launch {
-            val exerciseList: ArrayList<ExcerciseData> = DataGenerator.generateLoseWeightExercises(bicycleCrunches, burpees, jumpingJacks, highKnees, pushups)
+            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateLoseWeightExercises(bicycleCrunches, burpees, jumpingJacks, highKnees, pushups)
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
     }
@@ -146,7 +146,7 @@ class WorkoutActivity : AppCompatActivity() {
     private fun gainMuscleRoutine(reps: String, benchPress: String, inclineBenchPress: String, squat: String, row: String, deadlift: String){
         CoroutineScope(Dispatchers.Main).launch {
             // Now you can use the passed-in variables within the coroutine
-            val exerciseList: ArrayList<ExcerciseData> = DataGenerator.generateGainMuscleExercises(reps, benchPress, inclineBenchPress, squat, row, deadlift)
+            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateGainMuscleExercises(reps, benchPress, inclineBenchPress, squat, row, deadlift)
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
     }
