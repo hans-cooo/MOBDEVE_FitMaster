@@ -29,6 +29,21 @@ class DataGenerator {
             return tempList
         }
 
+        fun getMETValue(exercise: String): Double{
+            return when(exercise){
+                MyFirestoreReferences.JUMPING_JACKS_FIELD -> 8.0
+                MyFirestoreReferences.PUSHUPS_FIELD -> 8.0
+                MyFirestoreReferences.BICYCLE_CRUNCHES -> 6.0
+                MyFirestoreReferences.BURPEES_FIELD -> 10.0
+                MyFirestoreReferences.HIGH_KNEES_FIELD -> 8.0
+                MyFirestoreReferences.SQUATS_FIELD -> 5.0
+                MyFirestoreReferences.ROWS_FIELD -> 4.0
+                MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD -> 4.5
+                MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD -> 4.5
+                MyFirestoreReferences.DEADLIFT_FIELD -> 5.5
+                else -> 0.0
+            }
+        }
 
 
         // Generates lose weight exercises
@@ -52,5 +67,6 @@ class DataGenerator {
             exercises.add(ExerciseData(name = "Deadlift", weight = "$deadlift kg", repetitions = "$reps reps"))
             return exercises
         }
+
     }
 }

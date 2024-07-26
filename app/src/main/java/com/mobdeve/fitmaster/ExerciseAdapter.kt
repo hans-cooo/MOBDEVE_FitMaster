@@ -8,10 +8,11 @@ import com.mobdeve.fitmaster.databinding.ExerciseBinding
 
 class ExerciseAdapter(private val exercises: List<ExerciseData>) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-    class ExerciseViewHolder(private val binding: ExerciseBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ExerciseViewHolder(private val binding: ExerciseBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindData(exercise: ExerciseData) {
             binding.tvExerciseName.text = exercise.name
-            if(exercise.weight.isNotBlank())
+            if (exercise.weight.isNotBlank())
                 binding.tvExerciseWeight.text = "${exercise.weight} kg"
             else {
                 binding.tvExerciseWeight.text = ""

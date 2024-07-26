@@ -3,6 +3,9 @@ package com.mobdeve.fitmaster
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
+import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +23,7 @@ class WorkoutActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityWorkoutBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var countDownTimer: CountDownTimer
+    private var totalExercises: Int = 0
     private var isTimerRunning = false
     private var timeLeftInMillis = 900000L
     private var isWorkoutStarted = false
@@ -42,6 +46,8 @@ class WorkoutActivity : AppCompatActivity() {
         val workoutQuery = workoutRef.whereEqualTo(MyFirestoreReferences.EMAIL_FIELD, email)
 
         var reps: String? = null
+        // Start workout timer
+        startWorkoutTimer()
 
         // Sets workout routine based on user's level, goal, and set weights
         query.get().addOnSuccessListener { documents ->
@@ -75,8 +81,9 @@ class WorkoutActivity : AppCompatActivity() {
                         exercises.add(ExerciseData(name, value, reps.toString())) }
                 }
 
-                viewBinding.exerciseRecycler.adapter = ExerciseAdapter(exercises)
-
+                val adapter = ExerciseAdapter(exercises)
+                viewBinding.exerciseRecycler.adapter = adapter
+                totalExercises = adapter.itemCount + 1
 
                 /*
                 val benchPress = document2.getString(MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD)
@@ -102,10 +109,21 @@ class WorkoutActivity : AppCompatActivity() {
         }
 
         viewBinding.btnFinWorkout.setOnClickListener(){
+            var exercisesCompleted = 0
+            for(i in 0..<(totalExercises-1)){
+                if(viewBinding.exerciseRecycler.layoutManager!!.findViewByPosition(i)?.findViewById<ToggleButton>(R.id.tbnStatus)?.isChecked!!)
+                    exercisesCompleted += 1
+            }
+            if(viewBinding.btnTimerFinish.isChecked)
+                exercisesCompleted += 1
+
             // TODO: Make this go to summary and complete any other logic relating to the workout ending
             // remember to finish() after the intent and finish() when going from summary to dashboard
-            if (isWorkoutStarted) {
+            if(exercisesCompleted == totalExercises){
                 finishWorkout()
+                val intent = Intent(this, Summary::class.java)
+                startActivity(intent)
+                finish()
             }
         }
 
