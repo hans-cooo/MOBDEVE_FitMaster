@@ -265,10 +265,12 @@
 
                 <EditText
                     android:id="@+id/edtDumbbellBenchPress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="50" />
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:id="@+id/dbkg"
@@ -294,10 +296,12 @@
 
                 <EditText
                     android:id="@+id/edtInclinedBenchPress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="50" />
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -322,10 +326,12 @@
 
                 <EditText
                     android:id="@+id/edtDeadlift"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="50" />
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -350,10 +356,12 @@
 
                 <EditText
                     android:id="@+id/edtRows"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="50" />
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -378,10 +386,12 @@
 
                 <EditText
                     android:id="@+id/edtSquat"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="50" />
+                    android:hint="50"
+                    android:inputType="number"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -424,10 +434,12 @@
 
             <EditText
                 android:id="@+id/edtBicycleCrunches"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="50" />
+                android:hint="50"
+                android:inputType="number"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -452,10 +464,12 @@
 
             <EditText
                 android:id="@+id/edtBurpees"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="50" />
+                android:hint="50"
+                android:inputType="number"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -480,10 +494,12 @@
 
             <EditText
                 android:id="@+id/edtHighKnees"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="50" />
+                android:hint="50"
+                android:inputType="number"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -508,10 +524,12 @@
 
             <EditText
                 android:id="@+id/edtJumpingJacks"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="50" />
+                android:hint="50"
+                android:inputType="number"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -536,10 +554,12 @@
 
             <EditText
                 android:id="@+id/edtPushups"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="50" />
+                android:hint="50"
+                android:inputType="number"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:layout_width="wrap_content"
