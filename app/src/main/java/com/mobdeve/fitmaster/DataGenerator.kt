@@ -3,6 +3,7 @@ package com.mobdeve.fitmaster
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import kotlin.time.Duration
 
 class DataGenerator {
     companion object {
@@ -45,6 +46,30 @@ class DataGenerator {
             }
         }
 
+/*      TODO: Complete code
+        fun calculateCalories(exercises: List<ExerciseData>, userWeight: Double, goal: String): Double {
+            var totalCalories = 0.0
+
+            for (exercise in exercises) {
+                val met = getMETValue(exercise.name.lowercase())
+                val durationInHours = exercise.duration / 60.0
+
+                // Adjust MET value based on the weight lifted and repetitions
+                val adjustedMET = if (goal == "gainMuscle") {
+                    met + (exercise.weight.toInt() * exercise.repetitions.toInt() * 0.01)
+                } else {
+                    met
+                }
+
+                // Calculate calories burned
+                val calories = adjustedMET * userWeight * durationInHours
+                totalCalories += calories
+            }
+
+            // Adjust calories based on user goal if needed
+            return totalCalories
+        }
+*/
 
         // Generates lose weight exercises
         fun generateLoseWeightExercises(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String): ArrayList<ExerciseData> {
