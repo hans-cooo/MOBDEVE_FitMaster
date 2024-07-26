@@ -1,10 +1,11 @@
 package com.mobdeve.fitmaster
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class WorkoutActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityWorkoutBinding
     private lateinit var recyclerView: RecyclerView
@@ -29,12 +31,15 @@ class WorkoutActivity : AppCompatActivity() {
     private var isWorkoutStarted = false
     private var startTime = 0L
     private val exercises = ArrayList<ExerciseData>()
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         this.viewBinding = ActivityWorkoutBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+        sharedPreferences = getSharedPreferences("WorkoutPrefs", Context.MODE_PRIVATE)
 
         val email = this.intent.getStringExtra("email")
         val day = this.intent.getStringExtra("day") // The day that was pressed
@@ -66,19 +71,20 @@ class WorkoutActivity : AppCompatActivity() {
                 val document2 = documents2.first()
 
                 // Chooses exercise list based on goals
-                val exerciseList = when(goal){
+                val exerciseList = when (goal) {
                     "loseWeight" -> MyFirestoreReferences.EXERCISE_LIST_LOSE_WEIGHT
                     "gainMuscle" -> MyFirestoreReferences.EXERCISE_LIST_GAIN_MUSCLE
                     else -> MyFirestoreReferences.EXERCISE_LIST
                 }
                 // Creates data for recyclerview
-                for (exerciseName in exerciseList){
+                for (exerciseName in exerciseList) {
                     val value = document2.getString(exerciseName).toString()
                     val name = MyFirestoreReferences.getName(exerciseName)
-                    if(goal == "loseWeight"){
-                        exercises.add(ExerciseData(name, "", value)) }
-                    else {
-                        exercises.add(ExerciseData(name, value, reps.toString())) }
+                    if (goal == "loseWeight") {
+                        exercises.add(ExerciseData(name, "", value))
+                    } else {
+                        exercises.add(ExerciseData(name, value, reps.toString()))
+                    }
                 }
 
                 val adapter = ExerciseAdapter(exercises)
@@ -108,18 +114,20 @@ class WorkoutActivity : AppCompatActivity() {
             }
         }
 
-        viewBinding.btnFinWorkout.setOnClickListener(){
+        viewBinding.btnFinWorkout.setOnClickListener() {
             var exercisesCompleted = 0
-            for(i in 0..<(totalExercises-1)){
-                if(viewBinding.exerciseRecycler.layoutManager!!.findViewByPosition(i)?.findViewById<ToggleButton>(R.id.tbnStatus)?.isChecked!!)
+            for (i in 0..<(totalExercises - 1)) {
+                if (viewBinding.exerciseRecycler.layoutManager!!.findViewByPosition(i)
+                        ?.findViewById<ToggleButton>(R.id.tbnStatus)?.isChecked!!
+                )
                     exercisesCompleted += 1
             }
-            if(viewBinding.btnTimerFinish.isChecked)
+            if (viewBinding.btnTimerFinish.isChecked)
                 exercisesCompleted += 1
 
             // TODO: Make this go to summary and complete any other logic relating to the workout ending
             // remember to finish() after the intent and finish() when going from summary to dashboard
-            if(exercisesCompleted == totalExercises){
+            if (exercisesCompleted == totalExercises) {
                 finishWorkout()
                 val intent = Intent(this, Summary::class.java)
                 startActivity(intent)
@@ -156,7 +164,7 @@ class WorkoutActivity : AppCompatActivity() {
                 viewBinding.btnStartTimer.text = "Start"
             }
         }
-
+        restoreProgress()
     }
 
     private fun startWorkoutTimer() {
@@ -177,17 +185,43 @@ class WorkoutActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun loseWeightRoutine(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String){
+    private fun loseWeightRoutine(
+        bicycleCrunches: String,
+        burpees: String,
+        jumpingJacks: String,
+        highKnees: String,
+        pushups: String
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
-            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateLoseWeightExercises(bicycleCrunches, burpees, jumpingJacks, highKnees, pushups)
+            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateLoseWeightExercises(
+                bicycleCrunches,
+                burpees,
+                jumpingJacks,
+                highKnees,
+                pushups
+            )
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
     }
 
-    private fun gainMuscleRoutine(reps: String, benchPress: String, inclineBenchPress: String, squat: String, row: String, deadlift: String){
+    private fun gainMuscleRoutine(
+        reps: String,
+        benchPress: String,
+        inclineBenchPress: String,
+        squat: String,
+        row: String,
+        deadlift: String
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
             // Now you can use the passed-in variables within the coroutine
-            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateGainMuscleExercises(reps, benchPress, inclineBenchPress, squat, row, deadlift)
+            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateGainMuscleExercises(
+                reps,
+                benchPress,
+                inclineBenchPress,
+                squat,
+                row,
+                deadlift
+            )
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
     }
@@ -214,5 +248,73 @@ class WorkoutActivity : AppCompatActivity() {
     private fun pauseTimer() {
         countDownTimer.cancel()
         isTimerRunning = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveProgress()
+    }
+
+    private fun saveProgress() {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isTimerRunning", isTimerRunning)
+        editor.putLong("timeLeftInMillis", timeLeftInMillis)
+        editor.putBoolean("isWorkoutStarted", isWorkoutStarted)
+        editor.putLong("startTime", startTime)
+        val exercisesCompleted = getCompletedExercises()
+        editor.putStringSet("completedExercises", exercisesCompleted)
+        editor.apply()
+    }
+
+    private fun restoreProgress() {
+        isTimerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
+        timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 900000L)
+        isWorkoutStarted = sharedPreferences.getBoolean("isWorkoutStarted", false)
+        startTime = sharedPreferences.getLong("startTime", 0L)
+        val completedExercises = sharedPreferences.getStringSet("completedExercises", emptySet())!!
+
+        if (isTimerRunning) {
+            startTimer()
+            viewBinding.btnStartTimer.text = "Pause"
+        } else {
+            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${
+                (timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')
+            }"
+        }
+
+        if (isWorkoutStarted) {
+            viewBinding.btnStartWorkout.isEnabled = false
+        }
+
+        restoreCompletedExercises(completedExercises)
+    }
+
+    private fun getCompletedExercises(): Set<String> {
+        val completedExercises = mutableSetOf<String>()
+        for (i in 0 until recyclerView.childCount) {
+            val view = recyclerView.layoutManager!!.findViewByPosition(i)
+            val toggleButton = view?.findViewById<ToggleButton>(R.id.tbnStatus)
+            if (toggleButton?.isChecked == true) {
+                completedExercises.add(exercises[i].name)
+            }
+        }
+        if (viewBinding.btnTimerFinish.isChecked) {
+            completedExercises.add("TimerFinish")
+        }
+        return completedExercises
+    }
+
+    private fun restoreCompletedExercises(completedExercises: Set<String>) {
+        for (i in 0 until recyclerView.childCount) {
+            val view = recyclerView.layoutManager!!.findViewByPosition(i)
+            val toggleButton = view?.findViewById<ToggleButton>(R.id.tbnStatus)
+            if (completedExercises.contains(exercises[i].name)) {
+                toggleButton?.isChecked = true
+            }
+        }
+        if (completedExercises.contains("TimerFinish")) {
+            viewBinding.btnTimerFinish.isChecked = true
+        }
+
     }
 }
