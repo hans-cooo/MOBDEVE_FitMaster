@@ -13,7 +13,7 @@ class DayStatusAdapter(private val days: List<DayStatus>, private val email: Str
     }
 
     override fun onBindViewHolder(holder: DayStatusViewHolder, position: Int) {
-        holder.bindData(days.get(position))
+        holder.bindData(days[position])
     }
 
     override fun getItemCount() = days.size

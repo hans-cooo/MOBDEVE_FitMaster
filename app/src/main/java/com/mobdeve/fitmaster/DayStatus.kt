@@ -1,6 +1,6 @@
 package com.mobdeve.fitmaster
 
-class DayStatus(day: String, status: Int) {
+class DayStatus(day: String, status: String) {
     var day = day
         private set
 

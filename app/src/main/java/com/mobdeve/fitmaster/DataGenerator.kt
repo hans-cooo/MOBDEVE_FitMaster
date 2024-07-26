@@ -19,7 +19,7 @@ class DataGenerator {
                     val days = listOf("Day1", "Day2", "Day3", "Day4", "Day5", "Day6", "Day7")
                     for (day in days) {
                         val dayStatus = document.getString(day) ?: "error"
-                        tempList.add(DayStatus(day, getStatusDrawable(dayStatus)))
+                        tempList.add(DayStatus(day, dayStatus))
                     }
                 }
             } catch (e: Exception) {
@@ -29,13 +29,7 @@ class DataGenerator {
             return tempList
         }
 
-        fun getStatusDrawable(status: String): Int {
-            return when (status) {
-                "complete" -> R.drawable.status_complete
-                "empty" -> R.drawable.status_empty
-                else -> R.drawable.status_error
-            }
-        }
+
 
         // Generates lose weight exercises
         fun generateLoseWeightExercises(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String): ArrayList<ExerciseData> {

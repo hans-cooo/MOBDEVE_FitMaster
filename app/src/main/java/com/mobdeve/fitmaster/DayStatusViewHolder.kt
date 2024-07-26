@@ -12,7 +12,9 @@ class DayStatusViewHolder(itemView: View, private val email: String) : RecyclerV
 
     fun bindData(dayStatus: DayStatus) {
         btnDay.text = dayStatus.day
-        imvStatus.setImageResource(dayStatus.status)
+        imvStatus.setImageResource(getStatusDrawable(dayStatus.status))
+        if(dayStatus.status == "empty")
+            btnDay.setBackgroundResource(R.drawable.button_blue)
 
         btnDay.setOnClickListener {
 
@@ -22,6 +24,14 @@ class DayStatusViewHolder(itemView: View, private val email: String) : RecyclerV
             intent.putExtra("day", dayStatus.day) // Passes name of the day (Day1) to WorkoutActivity
             context.startActivity(intent)
 
+        }
+    }
+
+    private fun getStatusDrawable(status: String): Int {
+        return when (status) {
+            "complete" -> R.drawable.status_complete
+            "empty" -> R.drawable.status_empty
+            else -> R.drawable.status_error
         }
     }
 }
