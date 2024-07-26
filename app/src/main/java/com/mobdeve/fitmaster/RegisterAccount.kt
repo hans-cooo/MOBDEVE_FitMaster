@@ -6,7 +6,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
@@ -56,6 +58,13 @@ class RegisterAccount : AppCompatActivity() {
                                 Toast.makeText(this, "Email already exists.", Toast.LENGTH_LONG)
                                     .show()
                             } else {
+                                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ task: Task<AuthResult> ->
+                                    if(task.isSuccessful){
+                                        Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_LONG).show()
+                                    }else {
+                                        Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_LONG).show()
+                                    }
+                                }
                                 // Creates the account
                                 val data = hashMapOf(
                                     MyFirestoreReferences.USERNAME_FIELD to name,

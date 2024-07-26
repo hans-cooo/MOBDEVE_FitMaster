@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
@@ -58,6 +60,11 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this, "Incomplete Fields", Toast.LENGTH_LONG).show()
             }
             else{
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task: Task<AuthResult> ->
+                    if(task.isSuccessful) {
+                        Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                    }
+                }
                 query.get()
                     .addOnSuccessListener { documents ->
                         if (documents.isEmpty) {

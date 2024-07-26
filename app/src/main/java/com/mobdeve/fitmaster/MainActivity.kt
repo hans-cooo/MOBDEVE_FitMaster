@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         if(auth.currentUser != null){
             val intent = Intent(this, Dashboard::class.java)
+            intent.putExtra("email", auth.currentUser!!.email.toString())
             startActivity(intent)
             finish()
         }
