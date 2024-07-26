@@ -263,32 +263,24 @@ class WorkoutActivity : AppCompatActivity() {
         editor.putBoolean("isWorkoutStarted", isWorkoutStarted)
         editor.putLong("startTime", startTime)
 
-        // Save completed exercises
         val completedExercises = mutableMapOf<Int, Boolean>() // Map index to checked state
         for (i in 0 until recyclerView.childCount) {
             val view = recyclerView.getChildAt(i)
             val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
             completedExercises[i] = toggleButton.isChecked
         }
-        editor.putStringSet(
-            "completedExercises",
-            completedExercises.map { "${it.key}:${it.value}" }.toSet()
-        )
+        editor.putStringSet("completedExercises", completedExercises.map { "${it.key}:${it.value}" }.toSet())
         editor.apply()
     }
 
-    private fun restoreProgress() {
-        // Restore timer and workout start state
-        isTimerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
-        timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 900000L)
-        isWorkoutStarted = sharedPreferences.getBoolean("isWorkoutStarted", false)
-        startTime = sharedPreferences.getLong("startTime", 0L)
+    private fun restoreFromBundle(savedInstanceState: Bundle) {
+        isTimerRunning = savedInstanceState.getBoolean("isTimerRunning", false)
+        timeLeftInMillis = savedInstanceState.getLong("timeLeftInMillis", 900000L)
+        isWorkoutStarted = savedInstanceState.getBoolean("isWorkoutStarted", false)
+        startTime = savedInstanceState.getLong("startTime", 0L)
 
-        // Restore completed exercises
-        val completedExercises =
-            sharedPreferences.getStringSet("completedExercises", emptySet()) ?: emptySet()
+        val completedExercises = savedInstanceState.getStringArrayList("completedExercises") ?: emptyList()
         val exerciseStates = completedExercises.associate { entry ->
-            // Ensure each entry is in the format "index:state"
             val parts = entry.split(":", limit = 2)
             (if (parts.size == 2) {
                 val index = parts[0].toIntOrNull()
@@ -297,16 +289,45 @@ class WorkoutActivity : AppCompatActivity() {
             } else {
                 null
             })!!
-        }.filterKeys { it != null } // Ensure valid indices
+        }.filterKeys { it != null }
 
-        // Update UI based on the restored states
         if (isTimerRunning) {
             startTimer()
             viewBinding.btnStartTimer.text = "Pause"
         } else {
-            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${
-                (timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')
-            }"
+            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${(timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')}"
+        }
+
+        if (isWorkoutStarted) {
+            viewBinding.btnStartWorkout.isEnabled = false
+        }
+
+        restoreCompletedExercises(exerciseStates)
+    }
+
+    private fun restoreFromSharedPreferences() {
+        isTimerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
+        timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 900000L)
+        isWorkoutStarted = sharedPreferences.getBoolean("isWorkoutStarted", false)
+        startTime = sharedPreferences.getLong("startTime", 0L)
+
+        val completedExercises = sharedPreferences.getStringSet("completedExercises", emptySet()) ?: emptySet()
+        val exerciseStates = completedExercises.associate { entry ->
+            val parts = entry.split(":", limit = 2)
+            (if (parts.size == 2) {
+                val index = parts[0].toIntOrNull()
+                val state = parts[1].toBoolean()
+                index?.let { it to state }
+            } else {
+                null
+            })!!
+        }.filterKeys { it != null }
+
+        if (isTimerRunning) {
+            startTimer()
+            viewBinding.btnStartTimer.text = "Pause"
+        } else {
+            viewBinding.tvTimer.text = "${timeLeftInMillis / 1000 / 60}:${(timeLeftInMillis / 1000 % 60).toString().padStart(2, '0')}"
         }
 
         if (isWorkoutStarted) {
@@ -317,16 +338,41 @@ class WorkoutActivity : AppCompatActivity() {
     }
 
     private fun restoreCompletedExercises(exerciseStates: Map<Int, Boolean>) {
-        // Ensure the exercise list and recycler view are properly synchronized
         for ((index, isChecked) in exerciseStates) {
             if (index in 0 until recyclerView.childCount) {
                 val view = recyclerView.getChildAt(index)
                 val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
-                toggleButton?.isChecked = isChecked
+                toggleButton.isChecked = isChecked
             }
         }
         if (exerciseStates.containsKey(totalExercises) && exerciseStates[totalExercises] == true) {
             viewBinding.btnTimerFinish.isChecked = true
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveProgress()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("isTimerRunning", isTimerRunning)
+        outState.putLong("timeLeftInMillis", timeLeftInMillis)
+        outState.putBoolean("isWorkoutStarted", isWorkoutStarted)
+        outState.putLong("startTime", startTime)
+
+        val completedExercises = mutableListOf<String>()
+        for (i in 0 until recyclerView.childCount) {
+            val view = recyclerView.getChildAt(i)
+            val toggleButton = view.findViewById<ToggleButton>(R.id.tbnStatus)
+            if (toggleButton.isChecked) {
+                completedExercises.add("$i:true")
+            }
+        }
+        if (viewBinding.btnTimerFinish.isChecked) {
+            completedExercises.add("${totalExercises}:true")
+        }
+        outState.putStringArrayList("completedExercises", ArrayList(completedExercises))
     }
 }
