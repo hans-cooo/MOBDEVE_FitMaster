@@ -42,6 +42,7 @@ class WorkoutActivity : AppCompatActivity() {
 
         val email = this.intent.getStringExtra("email")
         val day = this.intent.getStringExtra("day") // The day that was pressed
+        viewBinding.tvwWorkout.text = "Workout — ${day}"
 
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
@@ -50,6 +51,7 @@ class WorkoutActivity : AppCompatActivity() {
         val workoutQuery = workoutRef.whereEqualTo(MyFirestoreReferences.EMAIL_FIELD, email)
 
         var reps: String? = null
+
         // Start workout timer
         startWorkoutTimer()
 
@@ -89,26 +91,6 @@ class WorkoutActivity : AppCompatActivity() {
                 viewBinding.exerciseRecycler.adapter = adapter
                 totalExercises = adapter.itemCount + 1
 
-                /*
-                val benchPress = document2.getString(MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD)
-                val inclineBenchPress = document2.getString(MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD)
-                val squat = document2.getString(MyFirestoreReferences.SQUATS_FIELD)
-                val row = document2.getString(MyFirestoreReferences.ROWS_FIELD)
-                val deadlift = document2.getString(MyFirestoreReferences.DEADLIFT_FIELD)
-                val bicycleCrunches = document2.getString(MyFirestoreReferences.BICYCLE_CRUNCHES)
-                val burpees = document2.getString(MyFirestoreReferences.BURPEES_FIELD)
-                val jumpingJacks = document2.getString(MyFirestoreReferences.JUMPING_JACKS_FIELD)
-                val highKnees = document2.getString(MyFirestoreReferences.HIGH_KNEES_FIELD)
-                val pushups = document2.getString(MyFirestoreReferences.PUSHUPS_FIELD)
-                val jogMinutes = document2.getString(MyFirestoreReferences.JOG_MINUTES)
-
-
-                if(goal == "loseWeight"){
-                    loseWeightRoutine(bicycleCrunches.toString(), burpees.toString(), jumpingJacks.toString(), highKnees.toString(), pushups.toString())
-                }else if(goal == "gainMuscle"){
-                    gainMuscleRoutine(reps.toString(), benchPress.toString(), inclineBenchPress.toString(), squat.toString(), row.toString(), deadlift.toString())
-                }
-                */
             }
         }
 
