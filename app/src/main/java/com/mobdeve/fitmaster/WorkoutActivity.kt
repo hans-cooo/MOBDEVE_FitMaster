@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +22,8 @@ class WorkoutActivity : AppCompatActivity() {
     private lateinit var countDownTimer: CountDownTimer
     private var isTimerRunning = false
     private var timeLeftInMillis = 900000L
+    private var isWorkoutStarted = false
+    private var startTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,8 +81,18 @@ class WorkoutActivity : AppCompatActivity() {
         viewBinding.btnFinWorkout.setOnClickListener(){
             // TODO: Make this go to summary and complete any other logic relating to the workout ending
             // remember to finish() after the intent and finish() when going from summary to dashboard
+            if (isWorkoutStarted) {
+                finishWorkout()
+            }
         }
 
+        viewBinding.btnStartWorkout.setOnClickListener {
+            if (!isWorkoutStarted) {
+                startWorkoutTimer()
+                isWorkoutStarted = true
+                viewBinding.btnStartWorkout.isEnabled = false
+            }
+        }
 
         // Set up Window Insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -103,6 +116,24 @@ class WorkoutActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun startWorkoutTimer() {
+        // Capture the start time in milliseconds
+        startTime = System.currentTimeMillis()
+    }
+
+    private fun finishWorkout() {
+        // Capture the end time in milliseconds
+        val endTime = System.currentTimeMillis()
+        // Calculate the duration in milliseconds
+        val duration = endTime - startTime
+
+        // Pass the duration to the Summary activity
+        val intent = Intent(this, Summary::class.java)
+        intent.putExtra("WORKOUT_DURATION", duration)
+        startActivity(intent)
+        finish()
     }
 
     private fun loseWeightRoutine(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String){
