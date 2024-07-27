@@ -78,4 +78,20 @@
             android:paddingTop="20dp" />
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnAdd"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="30dp"
+        android:adjustViewBounds="false"
+        android:background="#00FFFFFF"
+        android:contentDescription="add"
+        android:cropToPadding="false"
+        android:hint="add"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/button_add"
+        tools:srcCompat="@drawable/button_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -122,7 +122,8 @@ class RegisterAccount : AppCompatActivity() {
                                             MyFirestoreReferences.DAY_4_FIELD to "empty",
                                             MyFirestoreReferences.DAY_5_FIELD to "empty",
                                             MyFirestoreReferences.DAY_6_FIELD to "empty",
-                                            MyFirestoreReferences.DAY_7_FIELD to "empty"
+                                            MyFirestoreReferences.DAY_7_FIELD to "empty",
+                                            MyFirestoreReferences.LAST_DAY_FIELD to "7"
                                         )
                                         userProgressRef.add(defaultProgressData)
                                             .addOnCompleteListener { task ->

@@ -25,6 +25,7 @@ object MyFirestoreReferences {
     const val DAY_5_FIELD = "Day5"
     const val DAY_6_FIELD = "Day6"
     const val DAY_7_FIELD = "Day7"
+    const val LAST_DAY_FIELD = "LastDay"
 
     // UserWorkout Fields
     const val MONDAY_FIELD = "dayMon"

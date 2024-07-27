@@ -1,6 +1,7 @@
 package com.mobdeve.fitmaster
 
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -8,7 +9,7 @@ import kotlin.time.Duration
 
 class DataGenerator {
     companion object {
-        suspend fun generateDayStatuses(email: String): ArrayList<DayStatus> {
+        suspend fun generateDayStatuses(email: String, uptoDay: Int): ArrayList<DayStatus> {
             val db = Firebase.firestore
             val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
             val tempList = ArrayList<DayStatus>()
@@ -18,10 +19,14 @@ class DataGenerator {
                 if (!querySnapshot.isEmpty) {
                     val document = querySnapshot.documents[0]
                     // Retrieve the status for each day from Day1 to Day7
-                    val days = listOf("Day1", "Day2", "Day3", "Day4", "Day5", "Day6", "Day7")
-                    for (day in days) {
-                        val dayStatus = document.getString(day) ?: "error"
-                        tempList.add(DayStatus(day, dayStatus))
+                    val range : IntRange = if(uptoDay < 7)
+                        1..uptoDay
+                    else
+                        (uptoDay-6)..uptoDay
+                    for (day in range) {
+                        val dayString = "Day$day"
+                        val dayStatus = document.getString(dayString) ?: "error"
+                        tempList.add(DayStatus(dayString, dayStatus))
                     }
                 }
             } catch (e: Exception) {
@@ -29,6 +34,41 @@ class DataGenerator {
                 // Handle the error accordingly
             }
             return tempList
+        }
+
+        suspend fun getLastDay(email: String): Int{
+            val db = Firebase.firestore
+            val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
+            var lastDay = 0
+
+            try{
+                val querySnapshot = statusRef.whereEqualTo("email", email).get().await()
+                if (!querySnapshot.isEmpty) {
+                    val document = querySnapshot.documents[0]
+                    lastDay = document.getString(MyFirestoreReferences.LAST_DAY_FIELD).toString().toInt()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle the error accordingly
+            }
+
+            /*
+            CoroutineScope(Dispatchers.Main).launch{
+                try {
+                    val querySnapshot = statusRef.whereEqualTo("email", email).get().await()
+                    if (!querySnapshot.isEmpty) {
+                        val document = querySnapshot.documents[0]
+                        // Retrieve the last workout day ID
+                        dayStatus = document.getString(MyFirestoreReferences.LAST_DAY_FIELD).toString().toInt()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    // Handle the error accordingly
+                }
+            }
+
+             */
+            return lastDay
         }
 
         private fun getMETValue(exercise: String): Double{
