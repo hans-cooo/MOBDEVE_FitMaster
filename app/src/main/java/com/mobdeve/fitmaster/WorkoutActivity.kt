@@ -195,37 +195,7 @@ class WorkoutActivity : AppCompatActivity() {
         // Capture the start time in milliseconds
         startTime = System.currentTimeMillis()
     }
-    /*
-    private fun finishWorkout() {
-        // Capture the end time in milliseconds
-        val endTime = System.currentTimeMillis()
-        // Calculate the duration in milliseconds
-        val duration = endTime - startTime
 
-        // Pass the duration to the Summary activity
-        val intent = Intent(this, Summary::class.java)
-        intent.putExtra("WORKOUT_DURATION", duration)
-        startActivity(intent)
-        finish()
-    }
-    */
-
-/*
-    private fun loseWeightRoutine(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String){
-        CoroutineScope(Dispatchers.Main).launch {
-            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateLoseWeightExercises(bicycleCrunches, burpees, jumpingJacks, highKnees, pushups)
-            recyclerView.adapter = ExerciseAdapter(exerciseList)
-        }
-    }
-
-    private fun gainMuscleRoutine(reps: String, benchPress: String, inclineBenchPress: String, squat: String, row: String, deadlift: String){
-        CoroutineScope(Dispatchers.Main).launch {
-            // Now you can use the passed-in variables within the coroutine
-            val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateGainMuscleExercises(reps, benchPress, inclineBenchPress, squat, row, deadlift)
-            recyclerView.adapter = ExerciseAdapter(exerciseList)
-        }
-    }
-*/
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {

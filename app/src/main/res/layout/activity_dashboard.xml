@@ -71,11 +71,49 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/btnPageLeft"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="left"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:rotation="180"
+                app:srcCompat="@drawable/triangle_right_blue" />
+
+            <TextView
+                android:id="@+id/tvwPageNo"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="@color/Material_Black"
+                android:textSize="34sp" />
+
+            <ImageButton
+                android:id="@+id/btnPageRight"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="right"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:srcCompat="@drawable/triangle_right_blue" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workoutDayRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

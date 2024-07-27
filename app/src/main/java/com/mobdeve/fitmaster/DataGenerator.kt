@@ -51,23 +51,6 @@ class DataGenerator {
                 e.printStackTrace()
                 // Handle the error accordingly
             }
-
-            /*
-            CoroutineScope(Dispatchers.Main).launch{
-                try {
-                    val querySnapshot = statusRef.whereEqualTo("email", email).get().await()
-                    if (!querySnapshot.isEmpty) {
-                        val document = querySnapshot.documents[0]
-                        // Retrieve the last workout day ID
-                        dayStatus = document.getString(MyFirestoreReferences.LAST_DAY_FIELD).toString().toInt()
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    // Handle the error accordingly
-                }
-            }
-
-             */
             return lastDay
         }
 

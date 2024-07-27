@@ -20,6 +20,8 @@ class Dashboard : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDashboardBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var email: String
+    private var pageNo = 1
+    private var lastDay = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,35 @@ class Dashboard : AppCompatActivity() {
 
         // Populate recyclerview
         CoroutineScope(Dispatchers.Main).launch {
-            generateRecycler(DataGenerator.getLastDay(email))
+            lastDay = DataGenerator.getLastDay(email)
+            generateRecycler(lastDay)
+            // Configure page buttons
+            viewBinding.btnPageLeft.setImageResource(R.drawable.triangle_right_gray)
+            if(lastDay <= 7)
+                viewBinding.btnPageRight.setImageResource(R.drawable.triangle_right_gray)
+        }
+
+        // Next page
+        viewBinding.btnPageRight.setOnClickListener(){
+            if(lastDay > pageNo*7){
+                pageNo += 1
+                generateRecycler(lastDay-7*(pageNo-1))
+                viewBinding.tvwPageNo.text = pageNo.toString()
+                viewBinding.btnPageLeft.setImageResource(R.drawable.triangle_right_blue)
+                if(lastDay <= pageNo*7)
+                    viewBinding.btnPageRight.setImageResource(R.drawable.triangle_right_gray)
+            }
+        }
+        // Previous page
+        viewBinding.btnPageLeft.setOnClickListener(){
+            if(pageNo > 1){
+                pageNo -= 1
+                generateRecycler(lastDay-7*(pageNo-1))
+                viewBinding.tvwPageNo.text = pageNo.toString()
+                viewBinding.btnPageRight.setImageResource(R.drawable.triangle_right_blue)
+                if(pageNo == 1)
+                    viewBinding.btnPageLeft.setImageResource(R.drawable.triangle_right_gray)
+            }
         }
 
         viewBinding.imvProfile.setOnClickListener(){
@@ -47,11 +77,12 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         viewBinding.btnAdd.setOnClickListener(){
             val db = Firebase.firestore
             val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
             CoroutineScope(Dispatchers.Main).launch {
-                val lastDay = DataGenerator.getLastDay(email) + 1
+                lastDay = DataGenerator.getLastDay(email) + 1
                 val updatedData = mutableMapOf<String, Any>()
                 updatedData["Day$lastDay"] = "empty"
                 updatedData[MyFirestoreReferences.LAST_DAY_FIELD] = (lastDay).toString()
@@ -62,6 +93,8 @@ class Dashboard : AppCompatActivity() {
                         val documentId = document.id
                         statusRef.document(documentId).update(updatedData)
                     }
+                    pageNo = 1
+                    viewBinding.tvwPageNo.text = "1"
                     generateRecycler(lastDay)
                 }
             }
@@ -71,7 +104,7 @@ class Dashboard : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CoroutineScope(Dispatchers.Main).launch {
-            generateRecycler(DataGenerator.getLastDay(email))
+            generateRecycler(lastDay-7*(pageNo-1))
         }
     }
 
@@ -81,40 +114,5 @@ class Dashboard : AppCompatActivity() {
             recyclerView.adapter = DayStatusAdapter(dayList, email)
         }
     }
-/*
-    private fun getLastDay(email:String, statusRef: CollectionReference):Int{
-        var lastDay = 2
-        val query = statusRef.whereEqualTo("email", email)
-        query.get().addOnSuccessListener { documents ->
-            if (documents != null && !documents.isEmpty) {
-                val document = documents.first()
-                lastDay = document.getString(MyFirestoreReferences.LAST_DAY_FIELD).toString().toInt()
-            } else {
-                Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
-            }
-        }.addOnFailureListener { exception ->
-            Toast.makeText(this, "Error fetching profile: ${exception.message}", Toast.LENGTH_LONG).show()
-        }
-
-        /*
-        CoroutineScope(Dispatchers.Main).launch{
-            try {
-                val querySnapshot = statusRef.whereEqualTo("email", email).get().await()
-                if (!querySnapshot.isEmpty) {
-                    val document = querySnapshot.documents[0]
-                    // Retrieve the last workout day ID
-                    dayStatus = document.getString(MyFirestoreReferences.LAST_DAY_FIELD).toString().toInt()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                // Handle the error accordingly
-            }
-        }
-
-         */
-        return lastDay
-    }
-
- */
 
 }
