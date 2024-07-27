@@ -5,7 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,14 +54,19 @@ class WorkoutActivity : AppCompatActivity() {
 
         var reps: String? = null
 
+        var level: String
+        var goal = ""
+        var userWeight = 0.0
+
         // Start workout timer
         startWorkoutTimer()
 
         // Sets workout routine based on user's level, goal, and set weights
         query.get().addOnSuccessListener { documents ->
             val document = documents.first()
-            val level = document.getString(MyFirestoreReferences.LEVEL_FIELD)
-            val goal = document.getString(MyFirestoreReferences.GOAL_FIELD)
+            level = document.getString(MyFirestoreReferences.LEVEL_FIELD).toString()
+            goal = document.getString(MyFirestoreReferences.GOAL_FIELD).toString()
+            userWeight = document.getString(MyFirestoreReferences.WEIGHT_FIELD).toString().toDouble()
 
             reps = when (level) {
                 "beginner" -> "6"
@@ -106,11 +113,28 @@ class WorkoutActivity : AppCompatActivity() {
             // TODO: Make this go to summary and complete any other logic relating to the workout ending
             // remember to finish() after the intent and finish() when going from summary to dashboard
             if(exercisesCompleted == totalExercises){
-                finishWorkout()
+
+                var totalCalories = 0.0
+                totalCalories += DataGenerator.calculateCalories(ExerciseData("jogging", "", ""), userWeight, goal)
+                Log.e("WorkoutActivity", "checking current calories (jogging): $totalCalories")
+                for (exercise in exercises){
+                    totalCalories += DataGenerator.calculateCalories(exercise, userWeight, goal)
+                    Log.e("WorkoutActivity", "checking current calories: $totalCalories")
+                }
+
+                // Capture the end time in milliseconds
+                val endTime = System.currentTimeMillis()
+                // Calculate the duration in milliseconds
+                val duration = endTime - startTime
                 val intent = Intent(this, Summary::class.java)
+                intent.putExtra("email", email)
+                intent.putExtra("calories", totalCalories)
+                intent.putExtra("WORKOUT_DURATION", duration)
                 startActivity(intent)
                 finish()
             }
+            else
+                Toast.makeText(this, "Finish all exercises first!", Toast.LENGTH_LONG).show()
         }
 
         viewBinding.btnStartWorkout.setOnClickListener {
@@ -151,7 +175,7 @@ class WorkoutActivity : AppCompatActivity() {
         // Capture the start time in milliseconds
         startTime = System.currentTimeMillis()
     }
-
+    /*
     private fun finishWorkout() {
         // Capture the end time in milliseconds
         val endTime = System.currentTimeMillis()
@@ -164,7 +188,9 @@ class WorkoutActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+    */
 
+/*
     private fun loseWeightRoutine(bicycleCrunches: String, burpees: String, jumpingJacks: String, highKnees: String, pushups: String){
         CoroutineScope(Dispatchers.Main).launch {
             val exerciseList: ArrayList<ExerciseData> = DataGenerator.generateLoseWeightExercises(bicycleCrunches, burpees, jumpingJacks, highKnees, pushups)
@@ -179,7 +205,7 @@ class WorkoutActivity : AppCompatActivity() {
             recyclerView.adapter = ExerciseAdapter(exerciseList)
         }
     }
-
+*/
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {

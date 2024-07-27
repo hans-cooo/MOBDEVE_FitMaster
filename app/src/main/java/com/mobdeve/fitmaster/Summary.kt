@@ -25,8 +25,17 @@ class Summary : AppCompatActivity() {
         val seconds = (duration / 1000) % 60
         val formattedDuration = String.format("%d:%02d", minutes, seconds)
 
-        // Display the duration
-        viewBinding.totalTimeText.setText("Total Time: \n$formattedDuration")
+        // Retrieve calories burned from the Intent
+        val caloriesBurned = intent.getDoubleExtra("calories", 0.0)
+
+
+        // Display the duration and calories burned
+        viewBinding.totalTimeText.setText("Total Time:\n$formattedDuration")
+        viewBinding.caloriesBurnedText.setText("Calories Burned:\n$caloriesBurned")
+
+        viewBinding.btnReturn.setOnClickListener{
+            finish()
+        }
     }
 }
 

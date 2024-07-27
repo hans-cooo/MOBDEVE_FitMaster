@@ -30,7 +30,7 @@ class DataGenerator {
             return tempList
         }
 
-        fun getMETValue(exercise: String): Double{
+        private fun getMETValue(exercise: String): Double{
             return when(exercise){
                 MyFirestoreReferences.JUMPING_JACKS_FIELD -> 8.0
                 MyFirestoreReferences.PUSHUPS_FIELD -> 8.0
@@ -44,6 +44,29 @@ class DataGenerator {
                 MyFirestoreReferences.DEADLIFT_FIELD -> 5.5
                 else -> 0.0
             }
+        }
+        fun calculateCalories(exercise: ExerciseData, userWeight: Double, goal: String): Double {
+            var calories = 0.0
+
+            val met = getMETValue(exercise.name.lowercase())
+
+            // Adjust MET value based on the weight lifted and repetitions for muscle gain exercises
+            val adjustedMET = if (goal == "gainMuscle" && exercise.weight.isNotEmpty() && exercise.repetitions.isNotEmpty()) {
+                met + (exercise.weight.toInt() * exercise.repetitions.toInt() * 0.01)
+            } else {
+                met
+            }
+
+            // Calculate calories burned
+            if (exercise.name.equals("jogging", ignoreCase = true)) {
+                val durationInHours = 15.0 / 60.0
+                calories = adjustedMET * userWeight * durationInHours
+            } else {
+                // For exercises based on repetitions and weights, assume 1 minute per set
+                calories = adjustedMET * userWeight * (exercise.repetitions.toInt() / 60.0)
+            }
+
+            return calories
         }
 
 /*      TODO: Complete code
