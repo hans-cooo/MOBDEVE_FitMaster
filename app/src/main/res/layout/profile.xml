@@ -245,42 +245,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <ImageView
-                    android:id="@+id/imvDark"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:padding="10dp"
-                    app:srcCompat="@drawable/icon_moon" />
-
-                <TextView
-                    android:id="@+id/tvwDarkMode"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6.5"
-                    android:fontFamily="@font/montserrat"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="Dark Mode"
-                    android:textColor="@color/Material_Black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <Switch
-                    android:id="@+id/swtDarkMode"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="2"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-            </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 
