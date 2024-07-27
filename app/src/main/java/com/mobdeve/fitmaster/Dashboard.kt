@@ -95,6 +95,9 @@ class Dashboard : AppCompatActivity() {
                     }
                     pageNo = 1
                     viewBinding.tvwPageNo.text = "1"
+                    viewBinding.btnPageLeft.setImageResource(R.drawable.triangle_right_gray)
+                    if(lastDay > 7)
+                        viewBinding.btnPageRight.setImageResource(R.drawable.triangle_right_blue)
                     generateRecycler(lastDay)
                 }
             }
