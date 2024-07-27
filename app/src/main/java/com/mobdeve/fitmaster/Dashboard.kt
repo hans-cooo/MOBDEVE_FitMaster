@@ -13,19 +13,20 @@ import kotlinx.coroutines.launch
 class Dashboard : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDashboardBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.viewBinding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        val email = this.intent.getStringExtra("email")
+        email = this.intent.getStringExtra("email").toString()
         this.recyclerView = viewBinding.workoutDayRecycler
         this.recyclerView.layoutManager = LinearLayoutManager(this)
 
         CoroutineScope(Dispatchers.Main).launch {
-            val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email.toString())
-            recyclerView.adapter = DayStatusAdapter(dayList, email.toString())
+            val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email)
+            recyclerView.adapter = DayStatusAdapter(dayList, email)
         }
 
         viewBinding.imvProfile.setOnClickListener(){
@@ -40,6 +41,14 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CoroutineScope(Dispatchers.Main).launch {
+            val dayList: ArrayList<DayStatus> = DataGenerator.generateDayStatuses(email)
+            recyclerView.adapter = DayStatusAdapter(dayList, email)
+        }
     }
 
 

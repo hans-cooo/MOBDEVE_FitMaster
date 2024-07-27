@@ -110,10 +110,30 @@ class WorkoutActivity : AppCompatActivity() {
             if(viewBinding.btnTimerFinish.isChecked)
                 exercisesCompleted += 1
 
-            // TODO: Make this go to summary and complete any other logic relating to the workout ending
-            // remember to finish() after the intent and finish() when going from summary to dashboard
             if(exercisesCompleted == totalExercises){
+                // Set day to complete
+                val statusRef = db.collection(MyFirestoreReferences.USER_PROGRESS_COLLECTION)
+                val updatedData = mutableMapOf<String, Any>()
+                updatedData[day.toString()] = "complete"
+                statusRef.whereEqualTo("email", email).get().addOnSuccessListener { documents ->
+                    if (documents != null && !documents.isEmpty) {
+                        val document = documents.first()
+                        val documentId = document.id
+                        statusRef.document(documentId).update(updatedData)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Workout complete!", Toast.LENGTH_LONG).show()
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(this, "Error updating profile: ${exception.message}", Toast.LENGTH_LONG).show()
+                            }
+                    } else {
+                        Toast.makeText(this, "No user found with this email", Toast.LENGTH_LONG).show()
+                    }
+                }.addOnFailureListener { exception ->
+                    Toast.makeText(this, "Error finding document: ${exception.message}", Toast.LENGTH_LONG).show()
+                }
 
+                // Calculate calories burned
                 var totalCalories = 0.0
                 totalCalories += DataGenerator.calculateCalories(ExerciseData("Jogging", "", ""), userWeight, goal)
                 Log.e("WorkoutActivity", "checking current calories (jogging): $totalCalories")
