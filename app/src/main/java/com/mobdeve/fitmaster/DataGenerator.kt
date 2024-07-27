@@ -55,7 +55,7 @@ class DataGenerator {
 
             // Adjust MET value based on the weight lifted and repetitions for muscle gain exercises
             val adjustedMET = if (goal == "gainMuscle" && exercise.weight.isNotEmpty() && exercise.repetitions.isNotEmpty()) {
-                met + (exercise.weight.toInt() * exercise.repetitions.toInt() * 0.01)
+                met + (exercise.weight.toInt() * exercise.repetitions.toInt() * 0.008)
             } else {
                 met
             }
