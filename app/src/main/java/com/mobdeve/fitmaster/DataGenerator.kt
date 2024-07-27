@@ -66,7 +66,10 @@ class DataGenerator {
                 calories = adjustedMET * userWeight * durationInHours
             } else {
                 // For exercises based on repetitions and weights, assume 1 minute per set
-                calories = adjustedMET * userWeight * (exercise.repetitions.toInt() / 60.0)
+                        val durationInMinutes = exercise.repetitions.toInt() / 15.0
+                        val durationInHours = durationInMinutes / 60.0
+                        calories = adjustedMET * userWeight * durationInHours
+
             }
 
             return calories
