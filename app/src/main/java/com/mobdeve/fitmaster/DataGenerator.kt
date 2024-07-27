@@ -33,11 +33,11 @@ class DataGenerator {
 
         private fun getMETValue(exercise: String): Double{
             return when(exercise){
-                "Jumping Jacks" -> 8.0
-                "Push Ups" -> 8.0
+                "Jumping Jacks" -> 6.5
+                "Push Ups" -> 7.0
                 "Bicycle Crunches" -> 6.0
-                "Burpees" -> 10.0
-                "High Knees" -> 8.0
+                "Burpees" -> 8.0
+                "High Knees" -> 6.5
                 "Squats" -> 5.0
                 "Rows" -> 4.0
                 "Dumbbell Bench Press" -> 4.5
