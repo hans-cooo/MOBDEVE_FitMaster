@@ -1,5 +1,6 @@
 package com.mobdeve.fitmaster
 
+import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -32,23 +33,25 @@ class DataGenerator {
 
         private fun getMETValue(exercise: String): Double{
             return when(exercise){
-                MyFirestoreReferences.JUMPING_JACKS_FIELD -> 8.0
-                MyFirestoreReferences.PUSHUPS_FIELD -> 8.0
-                MyFirestoreReferences.BICYCLE_CRUNCHES -> 6.0
-                MyFirestoreReferences.BURPEES_FIELD -> 10.0
-                MyFirestoreReferences.HIGH_KNEES_FIELD -> 8.0
-                MyFirestoreReferences.SQUATS_FIELD -> 5.0
-                MyFirestoreReferences.ROWS_FIELD -> 4.0
-                MyFirestoreReferences.DUMBELL_BENCH_PRESS_FIELD -> 4.5
-                MyFirestoreReferences.INCLINED_BENCH_PRESS_FIELD -> 4.5
-                MyFirestoreReferences.DEADLIFT_FIELD -> 5.5
+                "Jumping Jacks" -> 8.0
+                "Push Ups" -> 8.0
+                "Bicycle Crunches" -> 6.0
+                "Burpees" -> 10.0
+                "High Knees" -> 8.0
+                "Squats" -> 5.0
+                "Rows" -> 4.0
+                "Dumbbell Bench Press" -> 4.5
+                "Inclined Bench Press" -> 4.5
+                "Deadlift" -> 5.5
+                "Jogging" -> 7.0
                 else -> 0.0
             }
         }
         fun calculateCalories(exercise: ExerciseData, userWeight: Double, goal: String): Double {
             var calories = 0.0
 
-            val met = getMETValue(exercise.name.lowercase())
+            val met = getMETValue(exercise.name)
+            Log.e("DataGenerator", "${exercise.name} , $met")
 
             // Adjust MET value based on the weight lifted and repetitions for muscle gain exercises
             val adjustedMET = if (goal == "gainMuscle" && exercise.weight.isNotEmpty() && exercise.repetitions.isNotEmpty()) {
@@ -58,7 +61,7 @@ class DataGenerator {
             }
 
             // Calculate calories burned
-            if (exercise.name.equals("jogging", ignoreCase = true)) {
+            if (exercise.name.equals("Jogging", ignoreCase = true)) {
                 val durationInHours = 15.0 / 60.0
                 calories = adjustedMET * userWeight * durationInHours
             } else {

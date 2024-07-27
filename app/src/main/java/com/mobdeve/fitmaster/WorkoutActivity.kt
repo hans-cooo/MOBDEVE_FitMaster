@@ -115,7 +115,7 @@ class WorkoutActivity : AppCompatActivity() {
             if(exercisesCompleted == totalExercises){
 
                 var totalCalories = 0.0
-                totalCalories += DataGenerator.calculateCalories(ExerciseData("jogging", "", ""), userWeight, goal)
+                totalCalories += DataGenerator.calculateCalories(ExerciseData("Jogging", "", ""), userWeight, goal)
                 Log.e("WorkoutActivity", "checking current calories (jogging): $totalCalories")
                 for (exercise in exercises){
                     totalCalories += DataGenerator.calculateCalories(exercise, userWeight, goal)
@@ -168,7 +168,7 @@ class WorkoutActivity : AppCompatActivity() {
         }
 
         // Restore progress if exists
-        restoreProgress()
+        //restoreProgress()
     }
 
     private fun startWorkoutTimer() {
